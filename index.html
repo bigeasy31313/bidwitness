@@ -385,6 +385,45 @@
 <meta name="twitter:title" content="BidWitness — Chicago construction leads from permit records">
 <meta name="twitter:description" content="Jobs with a permit and a GC named, but nobody in your trade yet. First brief free.">
 <meta name="twitter:image" content="https://bidwitness.com/og-image.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://bidwitness.com/#org",
+      "name": "BidWitness",
+      "legalName": "Theta Work Labs LLC",
+      "url": "https://bidwitness.com/",
+      "logo": "https://bidwitness.com/android-chrome-512.png",
+      "email": "hello@bidwitness.com",
+      "description": "Weekly construction lead briefs built from public building permit records: jobs with a permit and a general contractor named, but no contractor in your trade yet."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://bidwitness.com/#site",
+      "url": "https://bidwitness.com/",
+      "name": "BidWitness",
+      "publisher": { "@id": "https://bidwitness.com/#org" }
+    },
+    {
+      "@type": "Service",
+      "name": "BidWitness permit lead briefs",
+      "serviceType": "Construction lead generation from public permit records",
+      "provider": { "@id": "https://bidwitness.com/#org" },
+      "areaServed": ["Chicago", "New York", "Seattle"],
+      "offers": [
+        { "@type": "Offer", "name": "Single", "price": "299", "priceCurrency": "USD",
+          "description": "One metro, one trade. Weekly brief every Monday with the general contractor named on every row." },
+        { "@type": "Offer", "name": "Multi", "price": "599", "priceCurrency": "USD",
+          "description": "Three metros or three trades, priority scoring, weekly plus mid-week alerts." },
+        { "@type": "Offer", "name": "Regional", "price": "999", "priceCurrency": "USD",
+          "description": "Unlimited metros in region, custom trade definitions, direct line for data requests." }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <script>document.body.className+=' js';</script>

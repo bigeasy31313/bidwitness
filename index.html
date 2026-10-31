@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BidWitness — The jobs with no one in your trade attached</title>
+<style>
+  :root{
+    --ink:#0d1117; --mid:#5b6472; --line:#e3e7ec; --wash:#f7f8fa;
+    --accent:#0b5fff; --good:#0f7b4f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:#fff;color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+  nav{border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;}
+  .logo{font-size:17px;font-weight:800;letter-spacing:-.4px;}
+  .logo span{color:var(--accent);}
+  .navlink{font-size:13px;color:var(--mid);text-decoration:none;}
+  .navlink:hover{color:var(--ink);}
+
+  header{padding:72px 0 56px;text-align:center;}
+  .eyebrow{
+    display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--accent);background:#eef4ff;
+    padding:5px 11px;border-radius:100px;margin-bottom:22px;
+  }
+  h1{
+    font-size:52px;line-height:1.06;letter-spacing:-2px;font-weight:800;
+    max-width:830px;margin:0 auto 20px;
+  }
+  h1 em{font-style:normal;color:var(--accent);}
+  .dek{font-size:18px;color:var(--mid);max-width:620px;margin:0 auto 32px;line-height:1.55;}
+  .cta{
+    display:inline-block;background:var(--ink);color:#fff;text-decoration:none;
+    font-size:15px;font-weight:650;padding:14px 28px;border-radius:8px;
+  }
+  .cta:hover{background:#000;}
+  .cta-sub{font-size:12.5px;color:var(--mid);margin-top:12px;}
+
+  .proof{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .proof div{padding:26px 18px;border-right:1px solid var(--line);}
+  .proof div:last-child{border-right:none;}
+  .proof b{display:block;font-size:27px;letter-spacing:-1px;font-weight:800;}
+  .proof i{font-style:normal;font-size:11px;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;}
+
+  section{padding:64px 0;}
+  h2{font-size:31px;letter-spacing:-1px;font-weight:800;margin-bottom:14px;line-height:1.2;}
+  .lede{font-size:16px;color:var(--mid);max-width:640px;margin-bottom:34px;line-height:1.6;}
+
+  .compare{width:100%;border-collapse:collapse;font-size:14px;}
+  .compare th{
+    text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--mid);padding:0 14px 10px 0;border-bottom:2px solid var(--ink);font-weight:700;
+  }
+  .compare td{padding:14px 14px 14px 0;border-bottom:1px solid var(--line);vertical-align:top;}
+  .compare .them{color:var(--mid);}
+  .compare .us{font-weight:650;background:#f5f9ff;}
+
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .how div{border-top:2px solid var(--ink);padding-top:16px;}
+  .how .n{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--accent);}
+  .how h3{font-size:17px;margin:7px 0 8px;letter-spacing:-.3px;}
+  .how p{font-size:14px;color:var(--mid);line-height:1.55;}
+
+  .quote{
+    background:var(--wash);border-left:3px solid var(--accent);
+    padding:26px 28px;margin:34px 0 0;border-radius:0 8px 8px 0;
+  }
+  .quote .big{font-size:19px;font-weight:650;letter-spacing:-.4px;line-height:1.45;margin-bottom:10px;}
+  .quote .small{font-size:13px;color:var(--mid);}
+  .quote code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;
+    background:#fff;padding:2px 6px;border-radius:4px;border:1px solid var(--line);
+  }
+
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .tier{border:1px solid var(--line);border-radius:12px;padding:26px 22px;}
+  .tier.best{border:2px solid var(--ink);position:relative;}
+  .tier .plan{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);}
+  .tier .price{font-size:36px;font-weight:800;letter-spacing:-1.6px;margin:8px 0 2px;}
+  .tier .per{font-size:13px;color:var(--mid);margin-bottom:16px;}
+  .tier ul{list-style:none;font-size:13.5px;line-height:1.9;color:#2b3440;}
+  .tier li:before{content:"—";color:var(--accent);margin-right:8px;}
+  .flag{
+    position:absolute;top:-10px;right:16px;background:var(--ink);color:#fff;
+    font-size:10px;font-weight:800;letter-spacing:.08em;padding:4px 9px;border-radius:4px;
+  }
+
+  .faq{border-top:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);padding:16px 0;}
+  .faq summary{font-size:15.5px;font-weight:650;cursor:pointer;letter-spacing:-.2px;}
+  .faq p{font-size:14px;color:var(--mid);margin-top:10px;line-height:1.6;max-width:680px;}
+
+  .final{text-align:center;background:var(--ink);color:#fff;padding:70px 0;}
+  .final h2{color:#fff;}
+  .final p{color:#9aa5b4;font-size:15px;max-width:520px;margin:0 auto 26px;}
+  .final .cta{background:#fff;color:var(--ink);}
+  .final .cta:hover{background:#e8ecf1;}
+
+  footer{border-top:1px solid var(--line);padding:26px 0;font-size:12px;color:var(--mid);}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  @media(max-width:760px){
+    h1{font-size:34px;letter-spacing:-1.2px;}
+    .proof{grid-template-columns:repeat(2,1fr);}
+    .proof div:nth-child(2){border-right:none;}
+    .how,.tiers{grid-template-columns:1fr;}
+    section{padding:44px 0;}
+    header{padding:48px 0 40px;}
+    .dek{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <div class="logo">Bid<span>Witness</span></div>
+  <a class="navlink" href="#pricing">Pricing</a>
+</div></nav>
+
+<header><div class="wrap">
+  <div class="eyebrow">Live permit intelligence</div>
+  <h1>Every job in your city that has a permit — and <em>nobody in your trade</em> attached.</h1>
+  <p class="dek">
+    Contractors read permit filings one at a time and miss the ones that matter.
+    BidWitness reads every filing in your metro, finds the jobs where your trade slot
+    is still empty, and emails you the shortlist every Monday.
+  </p>
+  <a class="cta" href="#pricing">Get this week's brief free</a>
+  <div class="cta-sub">No contract. No setup call. Cancel in one click.</div>
+      <div class="cta-sub" style="margin-top:8px;"><a href="sample-brief.html" style="color:#0b5fff;">See this week's Chicago roofing brief &rarr;</a></div>
+</div></header>
+
+<div class="wrap"><div class="proof">
+  <div><b id="stat-jobs">78</b><i>Open jobs, one city, 30 days</i></div>
+  <div><b id="stat-value">$246M</b><i>Permitted work in that list</i></div>
+  <div><b>4</b><i>Metros covered today</i></div>
+  <div><b>0</b><i>Ad spend required</i></div>
+</div></div>
+
+<section><div class="wrap">
+  <h2>Everyone else sells you the haystack.</h2>
+  <p class="lede">
+    Permit data has been for sale for twenty years. It's sold as raw records — thousands
+    of rows a week, and the contractor is left to read them. That's not a lead list,
+    that's homework.
+  </p>
+
+  <table class="compare">
+    <tr><th>What you get</th><th>Typical permit feed</th><th>BidWitness</th></tr>
+    <tr><td>Raw permit records</td><td class="them">Yes — 2,000+ rows/week</td><td class="us">Yes, but pre-filtered</td></tr>
+    <tr><td>Filtered to your trade</td><td class="them">No</td><td class="us">Yes</td></tr>
+    <tr><td>Filtered to your value floor</td><td class="them">No</td><td class="us">Yes</td></tr>
+    <tr><td>Knows if your trade is already assigned</td><td class="them">No</td><td class="us">Yes — the core of it</td></tr>
+    <tr><td>Names the general contractor to call</td><td class="them">Buried in the row</td><td class="us">Front and centre</td></tr>
+    <tr><td>Price</td><td class="them">$20–$599/mo</td><td class="us">$299/mo</td></tr>
+  </table>
+
+  <div class="quote">
+    <div class="big">
+      The permit for <code>1331 S WELLS ST</code> is a $94,000,000 job.
+      The filing names the owner, the architect, the expeditor, the general contractor
+      and the mason. It does not name an electrician, a plumber, a roofer, a carpenter,
+      an HVAC contractor or an excavator.
+    </div>
+    <div class="small">
+      That is six open trade slots on one job — and it was published months ago, for free,
+      where anyone could have found it.
+    </div>
+  </div>
+</div></section>
+
+<section style="background:var(--wash);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+<div class="wrap">
+  <h2>How it works</h2>
+  <p class="lede">Three steps. You only see step three.</p>
+  <div class="how">
+    <div>
+      <div class="n">01</div>
+      <h3>We read every filing</h3>
+      <p>The city publishes permits daily. We pull all of them, every day, across every
+      covered metro — new construction, alterations, demolitions.</p>
+    </div>
+    <div>
+      <div class="n">02</div>
+      <h3>We find the empty slot</h3>
+      <p>Each filing lists the trades already attached. We compare that against the trades
+      a job of that type needs, and flag the ones nobody has claimed.</p>
+    </div>
+    <div>
+      <div class="n">03</div>
+      <h3>You get a shortlist</h3>
+      <p>Monday morning: the jobs in your city, in your trade, above your floor — scored
+      by size, freshness and how many trades are still open.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="pricing"><div class="wrap">
+  <h2>Pricing</h2>
+  <p class="lede">Priced against the job, not against other software. One foundation job pays for a decade.</p>
+  <div class="tiers">
+    <div class="tier">
+      <div class="plan">Single</div>
+      <div class="price">$299</div>
+      <div class="per">per month</div>
+      <ul>
+        <li>One metro, one trade</li>
+        <li>Weekly brief, every Monday</li>
+        <li>Your value floor</li>
+        <li>GC name on every row</li>
+      </ul>
+      <a class="cta" href="https://buy.stripe.com/cNidR98PLfl1gJ4aWPcAo01" style="display:block;margin-top:16px;text-align:center;">Start &mdash; first brief free</a>
+    </div>
+    <div class="tier best">
+      <div class="flag">MOST COMMON</div>
+      <div class="plan">Multi</div>
+      <div class="price">$599</div>
+      <div class="per">per month</div>
+      <ul>
+        <li>Three metros or three trades</li>
+        <li>Everything in Single</li>
+        <li>Priority scoring</li>
+        <li>Weekly + mid-week alerts</li>
+      </ul>
+    </div>
+    <div class="tier">
+      <div class="plan">Regional</div>
+      <div class="price">$999</div>
+      <div class="per">per month</div>
+      <ul>
+        <li>Unlimited metros in region</li>
+        <li>Everything in Multi</li>
+        <li>Custom trade definitions</li>
+        <li>Direct line for data requests</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section class="faq"><div class="wrap">
+  <h2>Straight answers</h2>
+  <div style="margin-top:26px">
+    <details open>
+      <summary>Is this just public data repackaged?</summary>
+      <p>Yes — and that's the point. Every permit is public. What isn't public is the
+      answer to "which of these 2,600 filings this week has my trade slot still open."
+      That answer is the product. You're paying for the reading, not the records.</p>
+    </details>
+    <details>
+      <summary>What if my trade is already listed on most jobs?</summary>
+      <p>Then we filter those out, which is the entire value. You only receive jobs where
+      your trade is genuinely absent from the filing. If a market turns out to have no
+      open slots, we tell you before you pay — and don't take the subscription.</p>
+    </details>
+    <details>
+      <summary>How current is it?</summary>
+      <p>City feeds publish daily. The Monday brief covers filings from the previous seven
+      days, with anything older clearly dated so you know what you're walking into.</p>
+    </details>
+    <details>
+      <summary>Can I get my money back?</summary>
+      <p>First brief is free. After that, cancel any time and the current month is
+      refunded if you tell us within seven days that the leads weren't relevant.</p>
+    </details>
+    <details>
+      <summary>Do you sell the same list to my competitor?</summary>
+      <p>No. One trade, one metro, one subscriber. If a slot is taken, the listing closes.</p>
+    </details>
+  </div>
+</div></section>
+
+<div class="final"><div class="wrap">
+  <h2>See this week's jobs before you pay anything.</h2>
+  <p>Tell us your city and your trade. The first brief arrives Monday. If it isn't
+  worth $299, you'll know in one read.</p>
+  <a class="cta" href="mailto:hello@bidwitness.com?subject=Send%20me%20this%20week%27s%20Chicago%20roofing%20brief">Get the free brief</a>
+</div></div>
+
+<footer><div class="wrap">
+  <div>BidWitness — permit intelligence for specialty contractors</div>
+  <div>Built on public building records. Not affiliated with any municipality.</div>
+</div></footer>
+
+</body>
+</html>

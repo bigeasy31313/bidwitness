@@ -120,6 +120,10 @@
   footer .wl-badge{display:block;margin-top:14px;line-height:0;opacity:.9;width:200px;}
   footer .wl-badge:hover{opacity:1;}
   footer .wl-badge img{width:200px;height:43px;display:block;}
+  footer .fl{display:flex;gap:16px;flex-wrap:wrap;}
+  footer .fl a{color:var(--mid);text-decoration:none;}
+  footer .fl a:hover{color:var(--ink);text-decoration:underline;}
+  footer .disc{margin-top:6px;max-width:520px;}
 
   @media(max-width:760px){
     h1{font-size:34px;letter-spacing:-1.2px;}
@@ -329,13 +333,20 @@
 
 <footer><div class="wrap">
   <div>
-    BidWitness — permit intelligence for specialty contractors
+    BidWitness &mdash; permit intelligence for specialty contractors. Operated by Theta Work Labs LLC.
+    <div class="disc">Built on public building records. Not affiliated with, endorsed by, or acting for any municipality.</div>
     <a class="wl-badge" href="https://websitelaunches.com/site/bidwitness.com" target="_blank" rel="noopener">
       <img src="https://websitelaunches.com/badge/bidwitness.com.svg?theme=light"
-        alt="Established online — public launch record" width="200" height="43" loading="lazy">
+        alt="Established online &mdash; public launch record" width="200" height="43" loading="lazy">
     </a>
   </div>
-  <div>Built on public building records. Not affiliated with any municipality.</div>
+  <div class="fl">
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/refunds">Refunds</a>
+    <a href="/cookies">Cookies</a>
+    <a href="mailto:hello@bidwitness.com">Contact</a>
+  </div>
 </div></footer>
 
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BidWitness — Chicago Construction Leads From Permit Records</title>
+<title>BidWitness — Construction Leads From Permit Records</title>
 <meta name="description" content="Weekly Chicago construction leads pulled from public permit records: jobs with a permit issued and a general contractor named, but no one in your trade attached yet. First brief free.">
 <style>
   :root{
@@ -237,6 +237,7 @@
         <li>Priority scoring</li>
         <li>Weekly + mid-week alerts</li>
       </ul>
+      <a class="cta" href="https://buy.stripe.com/6oU14n8PL3CjeAW3uncAo02" style="display:block;margin-top:16px;text-align:center;">Start &mdash; first brief free</a>
     </div>
     <div class="tier">
       <div class="plan">Regional</div>
@@ -248,6 +249,7 @@
         <li>Custom trade definitions</li>
         <li>Direct line for data requests</li>
       </ul>
+      <a class="cta" href="https://buy.stripe.com/9B6bJ11njgp5boKfd5cAo03" style="display:block;margin-top:16px;text-align:center;">Start &mdash; first brief free</a>
     </div>
   </div>
 </div></section>
@@ -288,7 +290,29 @@
   <h2>See this week's jobs before you pay anything.</h2>
   <p>Tell us your city and your trade. The first brief arrives Monday. If it isn't
   worth $299, you'll know in one read.</p>
-  <a class="cta" href="mailto:hello@bidwitness.com?subject=Send%20me%20this%20week%27s%20Chicago%20roofing%20brief">Get the free brief</a>
+  <form id="brief-form" action="https://formsubmit.co/hello@bidwitness.com" method="POST" style="max-width:440px;margin:22px auto 0;text-align:left;">
+    <input type="hidden" name="_subject" value="BidWitness — free brief request">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <label for="bf-email" style="display:block;font-size:13px;font-weight:600;margin-bottom:5px;">Work email</label>
+    <input id="bf-email" name="email" type="email" required placeholder="you@yourcompany.com"
+      style="width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:7px;font-size:15px;margin-bottom:12px;font-family:inherit;">
+    <label for="bf-city" style="display:block;font-size:13px;font-weight:600;margin-bottom:5px;">City</label>
+    <select id="bf-city" name="city" required
+      style="width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:7px;font-size:15px;margin-bottom:12px;font-family:inherit;background:#fff;">
+      <option value="">Choose your metro</option>
+      <option>Chicago</option>
+      <option>New York</option>
+      <option>Seattle</option>
+      <option>Other — tell us below</option>
+    </select>
+    <label for="bf-trade" style="display:block;font-size:13px;font-weight:600;margin-bottom:5px;">Your trade</label>
+    <input id="bf-trade" name="trade" required placeholder="Roofing, electrical, HVAC…"
+      style="width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:7px;font-size:15px;margin-bottom:16px;font-family:inherit;">
+    <button type="submit" class="cta" style="width:100%;border:0;cursor:pointer;font-family:inherit;font-size:15px;">Get the free brief</button>
+  </form>
+  <p style="font-size:13px;color:var(--mid);margin-top:14px;">Or email us directly at
+  <strong>hello@bidwitness.com</strong> — replies come from a real person, usually same day.</p>
 </div></div>
 
 <footer><div class="wrap">

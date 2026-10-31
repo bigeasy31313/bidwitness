@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BidWitness — Construction Leads From Permit Records</title>
 <meta name="description" content="Weekly Chicago construction leads pulled from public permit records: jobs with a permit issued and a general contractor named, but no one in your trade attached yet. First brief free.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0b5fff">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b5fff">
+<meta name="msapplication-TileColor" content="#0b5fff">
 <style>
   :root{
     --ink:#0d1117; --mid:#5b6472; --line:#e3e7ec; --wash:#f7f8fa;
@@ -108,6 +117,9 @@
 
   footer{border-top:1px solid var(--line);padding:26px 0;font-size:12px;color:var(--mid);}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  footer .wl-badge{display:block;margin-top:14px;line-height:0;opacity:.9;width:200px;}
+  footer .wl-badge:hover{opacity:1;}
+  footer .wl-badge img{width:200px;height:43px;display:block;}
 
   @media(max-width:760px){
     h1{font-size:34px;letter-spacing:-1.2px;}
@@ -316,7 +328,13 @@
 </div></div>
 
 <footer><div class="wrap">
-  <div>BidWitness — permit intelligence for specialty contractors</div>
+  <div>
+    BidWitness — permit intelligence for specialty contractors
+    <a class="wl-badge" href="https://websitelaunches.com/site/bidwitness.com" target="_blank" rel="noopener">
+      <img src="https://websitelaunches.com/badge/bidwitness.com.svg?theme=light"
+        alt="Established online — public launch record" width="200" height="43" loading="lazy">
+    </a>
+  </div>
   <div>Built on public building records. Not affiliated with any municipality.</div>
 </div></footer>
 

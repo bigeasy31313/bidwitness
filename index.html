@@ -7,132 +7,370 @@
 <meta name="description" content="Chicago construction leads from public permit records: jobs with a permit and a general contractor named, but nobody in your trade yet. First brief free.">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0b5fff">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0b5fff">
 <meta name="msapplication-TileColor" content="#0b5fff">
+<link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  @font-face{
+    font-family:'Barlow Condensed';font-style:normal;font-weight:600;
+    font-display:swap;src:url('/fonts/barlow-condensed-600.woff2') format('woff2');
+  }
+  @font-face{
+    font-family:'Barlow Condensed';font-style:normal;font-weight:700;
+    font-display:swap;src:url('/fonts/barlow-condensed-700.woff2') format('woff2');
+  }
+  @font-face{
+    font-family:'Inter';font-style:normal;font-weight:100 900;
+    font-display:swap;src:url('/fonts/inter-var.woff2') format('woff2');
+  }
+
   :root{
-    --ink:#0d1117; --mid:#5b6472; --line:#e3e7ec; --wash:#f7f8fa;
-    --accent:#0b5fff; --good:#0f7b4f;
+    --ink:#0c1116; --char:#141b23; --mid:#5b6472; --line:#e4e8ee;
+    --wash:#f5f7fa; --accent:#0b5fff; --tint:#eaf1ff; --good:#0f7b4f;
+    --display:'Barlow Condensed',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
   body{
-    background:#fff;color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;line-height:1.5;
+    background:#fff;color:var(--ink);font-family:var(--body);
+    -webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;
   }
-  .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
-  nav{border-bottom:1px solid var(--line);}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;}
-  .logo{font-size:17px;font-weight:800;letter-spacing:-.4px;}
-  .logo span{color:var(--accent);}
-  .navlink{font-size:13px;color:var(--mid);text-decoration:none;}
-  .navlink:hover{color:var(--ink);}
+  a{color:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
 
-  header{padding:72px 0 56px;text-align:center;}
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);
+    backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;}
+  .logo{
+    display:flex;align-items:center;gap:9px;font-family:var(--display);
+    font-size:23px;font-weight:700;letter-spacing:.01em;text-decoration:none;
+  }
+  .logo .mark{
+    width:22px;height:22px;border-radius:5px;background:var(--accent);
+    display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
+  }
+  .logo .mark svg{display:block;}
+  .logo b{font-weight:700;}
+  .logo span{color:var(--accent);font-weight:700;}
+  .navright{display:flex;align-items:center;gap:22px;}
+  .navlink{
+    font-size:13.5px;color:var(--mid);text-decoration:none;font-weight:500;
+  }
+  .navlink:hover{color:var(--ink);}
+  .navcta{
+    font-size:13.5px;font-weight:600;text-decoration:none;color:#fff;background:var(--ink);
+    padding:9px 16px;border-radius:7px;
+  }
+  .navcta:hover{background:#000;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;border-bottom:1px solid var(--line);}
+  .hero .wrap{
+    display:grid;grid-template-columns:1.02fr .98fr;gap:0;
+    align-items:center;min-height:min(84vh,720px);padding-top:44px;padding-bottom:44px;
+  }
+  .hero-copy{padding-right:44px;max-width:600px;}
   .eyebrow{
-    display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.09em;
-    text-transform:uppercase;color:var(--accent);background:#eef4ff;
-    padding:5px 11px;border-radius:100px;margin-bottom:22px;
+    display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+    background:var(--tint);padding:6px 11px;border-radius:100px;margin-bottom:24px;
+  }
+  .eyebrow .dot{
+    width:5px;height:5px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 0 3px rgba(11,95,255,.16);
   }
   h1{
-    font-size:52px;line-height:1.06;letter-spacing:-2px;font-weight:800;
-    max-width:830px;margin:0 auto 20px;
+    font-family:var(--display);font-weight:700;font-size:clamp(40px,4.3vw,62px);
+    line-height:1.0;letter-spacing:-.005em;margin-bottom:22px;
   }
   h1 em{font-style:normal;color:var(--accent);}
-  .dek{font-size:18px;color:var(--mid);max-width:620px;margin:0 auto 32px;line-height:1.55;}
+  h1 .u{
+    display:inline-block;position:relative;
+  }
+  .dek{
+    font-size:16.5px;color:var(--mid);max-width:430px;margin-bottom:30px;line-height:1.62;
+  }
   .cta{
     display:inline-block;background:var(--ink);color:#fff;text-decoration:none;
-    font-size:15px;font-weight:650;padding:14px 28px;border-radius:8px;
+    font-family:var(--body);font-size:15px;font-weight:600;padding:15px 26px;
+    border-radius:8px;border:0;cursor:pointer;transition:background .15s,transform .15s;
   }
-  .cta:hover{background:#000;}
-  .cta-sub{font-size:12.5px;color:var(--mid);margin-top:12px;}
+  .cta:hover{background:#000;transform:translateY(-1px);}
+  .cta.blue{background:var(--accent);}
+  .cta.blue:hover{background:#0049d4;}
+  .cta-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+  .textlink{
+    font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;
+    border-bottom:1.5px solid var(--accent);padding-bottom:1px;
+  }
+  .textlink:hover{color:var(--accent);}
+  .cta-sub{font-size:12.5px;color:var(--mid);margin-top:16px;letter-spacing:.01em;}
 
+  .hero-visual{position:relative;align-self:stretch;display:flex;align-items:center;}
+  .hero-visual .shot{
+    position:relative;width:100%;height:100%;min-height:440px;border-radius:14px;
+    overflow:hidden;box-shadow:0 24px 60px -28px rgba(12,17,22,.5);
+  }
+  .hero-visual .shot img{
+    width:100%;height:100%;object-fit:cover;object-position:50% 55%;display:block;
+  }
+  .hero-visual .shot:after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(12,17,22,.28) 0%,rgba(12,17,22,0) 38%,rgba(12,17,22,.42) 100%);
+  }
+  .tag{
+    position:absolute;z-index:2;font-family:var(--display);font-size:13px;
+    font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#fff;
+    background:rgba(12,17,22,.62);backdrop-filter:blur(6px);
+    padding:7px 12px;border-radius:5px;
+  }
+  .tag.tl{top:16px;left:16px;}
+
+  /* floating lead card */
+  .leadcard{
+    position:absolute;z-index:3;left:-46px;bottom:26px;width:308px;
+    background:#fff;border-radius:11px;padding:17px 18px 15px;
+    box-shadow:0 22px 50px -18px rgba(12,17,22,.45),0 0 0 1px rgba(12,17,22,.05);
+  }
+  .leadcard .hdr{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:11px;
+  }
+  .leadcard .hdr span{
+    font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--mid);
+  }
+  .leadcard .pill{
+    font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--good);background:#e8f6ee;padding:3px 7px;border-radius:4px;
+  }
+  .leadcard .addr{
+    font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:.005em;
+    line-height:1.05;margin-bottom:3px;
+  }
+  .leadcard .meta{font-size:11.5px;color:var(--mid);margin-bottom:13px;}
+  .slots{display:flex;flex-wrap:wrap;gap:5px;}
+  .slot{
+    font-size:10.5px;font-weight:600;padding:4px 8px;border-radius:4px;
+    border:1px solid var(--line);color:var(--mid);background:#fff;white-space:nowrap;
+  }
+  .slot.taken{color:#9aa3af;text-decoration:line-through;background:var(--wash);}
+  .slot.open{color:var(--accent);border-color:#c9dcff;background:var(--tint);}
+  .slot.open:after{content:" open";font-weight:700;font-size:9px;letter-spacing:.06em;text-transform:uppercase;}
+  .leadcard .foot{
+    margin-top:12px;padding-top:10px;border-top:1px solid var(--line);
+    font-size:11px;color:var(--mid);display:flex;justify-content:space-between;
+  }
+  .leadcard .foot b{color:var(--ink);font-weight:700;}
+
+  /* ---------- stats ---------- */
   .proof{
     display:grid;grid-template-columns:repeat(4,1fr);
-    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    border-bottom:1px solid var(--line);
   }
-  .proof div{padding:26px 18px;border-right:1px solid var(--line);}
-  .proof div:last-child{border-right:none;}
-  .proof b{display:block;font-size:27px;letter-spacing:-1px;font-weight:800;}
-  .proof i{font-style:normal;font-size:11px;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;}
+  .proof div{padding:26px 22px 26px 0;}
+  .proof div + div{padding-left:26px;border-left:1px solid var(--line);}
+  .proof b{
+    display:block;font-family:var(--display);font-size:34px;letter-spacing:.005em;
+    font-weight:700;line-height:1;
+  }
+  .proof i{
+    font-style:normal;font-size:11px;color:var(--mid);text-transform:uppercase;
+    letter-spacing:.09em;display:block;margin-top:7px;line-height:1.4;
+  }
 
-  section{padding:64px 0;}
-  h2{font-size:31px;letter-spacing:-1px;font-weight:800;margin-bottom:14px;line-height:1.2;}
-  .lede{font-size:16px;color:var(--mid);max-width:640px;margin-bottom:34px;line-height:1.6;}
+  /* ---------- sections ---------- */
+  section{padding:88px 0;}
+  .kicker{
+    font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:14px;
+  }
+  h2{
+    font-family:var(--display);font-weight:700;font-size:clamp(32px,3.6vw,46px);
+    letter-spacing:-.005em;line-height:1.02;margin-bottom:16px;
+  }
+  .lede{font-size:16px;color:var(--mid);max-width:600px;margin-bottom:40px;line-height:1.65;}
 
-  .compare{width:100%;border-collapse:collapse;font-size:14px;}
+  /* comparison */
+  .compare{width:100%;border-collapse:collapse;font-size:14.5px;}
   .compare th{
-    text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
-    color:var(--mid);padding:0 14px 10px 0;border-bottom:2px solid var(--ink);font-weight:700;
+    text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.11em;
+    color:var(--mid);padding:0 18px 12px 0;border-bottom:2px solid var(--ink);font-weight:700;
   }
-  .compare td{padding:14px 14px 14px 0;border-bottom:1px solid var(--line);vertical-align:top;}
-  .compare .them{color:var(--mid);}
-  .compare .us{font-weight:650;background:#f5f9ff;}
+  .compare th:last-child{color:var(--accent);}
+  .compare td{padding:15px 18px 15px 0;border-bottom:1px solid var(--line);vertical-align:top;}
+  .compare td:first-child{font-weight:500;}
+  .compare .them{color:#8b95a3;}
+  .compare .us{font-weight:600;color:var(--ink);background:rgba(11,95,255,.035);padding-left:16px;}
+  .compare th.us{border-color:var(--accent);}
 
-  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
-  .how div{border-top:2px solid var(--ink);padding-top:16px;}
-  .how .n{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--accent);}
-  .how h3{font-size:17px;margin:7px 0 8px;letter-spacing:-.3px;}
-  .how p{font-size:14px;color:var(--mid);line-height:1.55;}
-
-  .quote{
-    background:var(--wash);border-left:3px solid var(--accent);
-    padding:26px 28px;margin:34px 0 0;border-radius:0 8px 8px 0;
+  /* permit panel */
+  .permit{
+    margin-top:44px;background:var(--char);color:#fff;border-radius:14px;
+    padding:38px 40px 34px;position:relative;overflow:hidden;
   }
-  .quote .big{font-size:19px;font-weight:650;letter-spacing:-.4px;line-height:1.45;margin-bottom:10px;}
-  .quote .small{font-size:13px;color:var(--mid);}
-  .quote code{
+  .permit:before{
+    content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;
+    border-radius:50%;background:radial-gradient(circle,rgba(11,95,255,.36),transparent 68%);
+  }
+  .permit .ph{
+    display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:15px;
+    letter-spacing:.16em;text-transform:uppercase;color:#8fa6c9;margin-bottom:18px;
+  }
+  .permit .ph b{color:#fff;background:rgba(11,95,255,.22);padding:4px 9px;border-radius:4px;letter-spacing:.08em;}
+  .permit .big{
+    position:relative;font-size:18px;line-height:1.62;font-weight:400;color:#e8edf5;
+    max-width:790px;letter-spacing:-.005em;
+  }
+  .permit .big strong{font-weight:600;color:#fff;}
+  .permit .small{
+    position:relative;margin-top:18px;font-size:13.5px;color:#93a3b8;max-width:640px;line-height:1.6;
+  }
+  .permit code{
     font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;
-    background:#fff;padding:2px 6px;border-radius:4px;border:1px solid var(--line);
+    background:rgba(255,255,255,.1);padding:2px 7px;border-radius:4px;color:#cfe0ff;
+    border:1px solid rgba(255,255,255,.08);
   }
 
-  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-  .tier{border:1px solid var(--line);border-radius:12px;padding:26px 22px;}
-  .tier.best{border:2px solid var(--ink);position:relative;}
-  .tier .plan{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);}
-  .tier .price{font-size:36px;font-weight:800;letter-spacing:-1.6px;margin:8px 0 2px;}
-  .tier .per{font-size:13px;color:var(--mid);margin-bottom:16px;}
-  .tier ul{list-style:none;font-size:13.5px;line-height:1.9;color:#2b3440;}
-  .tier li:before{content:"—";color:var(--accent);margin-right:8px;}
+  /* how */
+  .how-sec{background:var(--wash);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;}
+  .how div{border-top:2px solid var(--ink);padding-top:20px;}
+  .how .n{
+    font-family:var(--display);font-size:40px;font-weight:700;color:var(--accent);
+    line-height:1;margin-bottom:10px;
+  }
+  .how h3{
+    font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:.005em;
+    margin-bottom:9px;
+  }
+  .how p{font-size:14.5px;color:var(--mid);line-height:1.62;}
+
+  /* pricing */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start;}
+  .tier{
+    border:1px solid var(--line);border-radius:13px;padding:30px 26px 26px;background:#fff;
+    transition:box-shadow .18s,transform .18s;
+  }
+  .tier:hover{box-shadow:0 18px 40px -26px rgba(12,17,22,.4);transform:translateY(-2px);}
+  .tier.best{border:2px solid var(--ink);position:relative;box-shadow:0 18px 44px -30px rgba(12,17,22,.55);}
+  .tier .plan{
+    font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);
+  }
+  .tier .price{
+    font-family:var(--display);font-size:46px;font-weight:700;letter-spacing:.005em;
+    margin:10px 0 0;line-height:1;
+  }
+  .tier .per{font-size:13px;color:var(--mid);margin:6px 0 20px;padding-bottom:20px;border-bottom:1px solid var(--line);}
+  .tier ul{list-style:none;font-size:14px;line-height:1.5;color:#2b3440;}
+  .tier li{padding:6px 0 6px 20px;position:relative;}
+  .tier li:before{
+    content:"";position:absolute;left:0;top:12px;width:9px;height:2px;background:var(--accent);
+  }
   .flag{
-    position:absolute;top:-10px;right:16px;background:var(--ink);color:#fff;
-    font-size:10px;font-weight:800;letter-spacing:.08em;padding:4px 9px;border-radius:4px;
+    position:absolute;top:-11px;left:26px;background:var(--accent);color:#fff;
+    font-size:9.5px;font-weight:800;letter-spacing:.11em;padding:5px 10px;border-radius:4px;
   }
 
+  /* faq */
   .faq{border-top:1px solid var(--line);}
-  .faq details{border-bottom:1px solid var(--line);padding:16px 0;}
-  .faq summary{font-size:15.5px;font-weight:650;cursor:pointer;letter-spacing:-.2px;}
-  .faq p{font-size:14px;color:var(--mid);margin-top:10px;line-height:1.6;max-width:680px;}
+  .faq details{border-bottom:1px solid var(--line);padding:20px 0;}
+  .faq summary{
+    font-family:var(--display);font-size:22px;font-weight:600;cursor:pointer;
+    letter-spacing:.005em;list-style:none;display:flex;justify-content:space-between;gap:16px;
+  }
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary:after{
+    content:"+";color:var(--accent);font-size:24px;line-height:1;flex:0 0 auto;
+  }
+  .faq details[open] summary:after{content:"–";}
+  .faq p{font-size:14.5px;color:var(--mid);margin-top:12px;line-height:1.65;max-width:700px;}
 
-  .final{text-align:center;background:var(--ink);color:#fff;padding:70px 0;}
-  .final h2{color:#fff;}
-  .final p{color:#9aa5b4;font-size:15px;max-width:520px;margin:0 auto 26px;}
-  .final .cta{background:#fff;color:var(--ink);}
-  .final .cta:hover{background:#e8ecf1;}
+  /* final */
+  .final{background:var(--ink);color:#fff;padding:88px 0 84px;position:relative;overflow:hidden;}
+  .final:before{
+    content:"";position:absolute;left:50%;top:-140px;width:760px;height:420px;
+    transform:translateX(-50%);background:radial-gradient(ellipse,rgba(11,95,255,.22),transparent 70%);
+  }
+  .final .wrap{position:relative;text-align:center;}
+  .final h2{color:#fff;max-width:640px;margin:0 auto 16px;}
+  .final p{color:#9aa5b4;font-size:15.5px;max-width:500px;margin:0 auto 30px;line-height:1.6;}
+  .final form{
+    max-width:460px;margin:0 auto;text-align:left;background:#151d26;
+    border:1px solid #263140;border-radius:13px;padding:22px;
+  }
+  .final label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;color:#cfd8e4;}
+  .final input,.final select{
+    width:100%;padding:11px 13px;border:1px solid #2c3846;border-radius:7px;
+    font-size:15px;font-family:inherit;background:#0e151d;color:#fff;margin-bottom:13px;
+  }
+  .final input:focus,.final select:focus{
+    outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(11,95,255,.25);
+  }
+  .final input::placeholder{color:#68737f;}
+  .final .cta{width:100%;background:var(--accent);color:#fff;padding:13px;}
+  .final .cta:hover{background:#0049d4;}
+  .final .fine{font-size:12.5px;color:#7c8797;margin-top:16px;}
+  .final .fine strong{color:#c3ccd8;font-weight:600;}
 
-  footer{border-top:1px solid var(--line);padding:26px 0;font-size:12px;color:var(--mid);}
-  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
-  footer .wl-badge{display:block;margin-top:14px;line-height:0;opacity:.9;width:200px;}
+  footer{border-top:1px solid #1d242c;padding:30px 0;font-size:12px;color:#68737f;background:var(--ink);}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;align-items:flex-start;}
+  footer .fl{display:flex;gap:18px;flex-wrap:wrap;}
+  footer .fl a{color:#8b96a4;text-decoration:none;}
+  footer .fl a:hover{color:#fff;}
+  footer .disc{margin-top:8px;max-width:460px;line-height:1.6;}
+  footer .wl-badge{display:block;margin-top:16px;line-height:0;opacity:.85;width:200px;}
   footer .wl-badge:hover{opacity:1;}
   footer .wl-badge img{width:200px;height:43px;display:block;}
-  footer .fl{display:flex;gap:16px;flex-wrap:wrap;}
-  footer .fl a{color:var(--mid);text-decoration:none;}
-  footer .fl a:hover{color:var(--ink);text-decoration:underline;}
-  footer .disc{margin-top:6px;max-width:520px;}
 
-  @media(max-width:760px){
-    h1{font-size:34px;letter-spacing:-1.2px;}
-    .proof{grid-template-columns:repeat(2,1fr);}
-    .proof div:nth-child(2){border-right:none;}
+  /* reveal */
+  .js .rv{opacity:0;transform:translateY(14px);}
+  .js .rv.in{opacity:1;transform:none;transition:opacity .55s ease,transform .55s ease;}
+  @media(prefers-reduced-motion:reduce){
+    .js .rv{opacity:1;transform:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  @media(max-width:940px){
+    .hero .wrap{grid-template-columns:1fr;gap:36px;padding-top:34px;padding-bottom:46px;}
+    .hero-copy{padding-right:0;max-width:none;}
+    .dek{max-width:520px;}
+    .hero-visual{display:block;}
+    .hero-visual .shot{min-height:380px;max-height:520px;width:100%;}
+    .leadcard{left:auto;right:16px;bottom:-24px;width:min(300px,86%);}
     .how,.tiers{grid-template-columns:1fr;}
-    section{padding:44px 0;}
-    header{padding:48px 0 40px;}
-    .dek{font-size:16px;}
+    .tier.best{order:-1;}
+    section{padding:64px 0;}
+    .proof{grid-template-columns:repeat(2,1fr);}
+    .proof div:nth-child(3){padding-left:0;border-left:none;border-top:1px solid var(--line);}
+    .proof div:nth-child(4){border-top:1px solid var(--line);}
+    .permit{padding:30px 24px;}
+  }
+  @media(max-width:600px){
+    .wrap{padding:0 20px;}
+    h1{font-size:clamp(38px,10.5vw,50px);}
+    .cta-row{gap:14px;}
+    .cta{width:100%;text-align:center;}
+    .textlink{width:auto;margin:0 auto;}
+    .hero-visual .shot{min-height:300px;max-height:380px;border-radius:12px;}
+    .leadcard{position:relative;left:0;right:0;bottom:auto;width:auto;margin:-34px 14px 0;}
+    .proof b{font-size:28px;}
+    .compare{font-size:13px;}
+    .compare th,.compare td{padding-right:10px;}
+    .compare th:nth-child(2),.compare td:nth-child(2){display:none;}
+    .compare .us{padding-left:10px;}
+    .navright .navlink{display:none;}
+    .final{padding:64px 0;}
+    .final form{padding:18px;}
   }
 </style>
 <link rel="canonical" href="https://bidwitness.com/">
@@ -140,30 +378,71 @@
 <meta property="og:description" content="Weekly list of Chicago jobs that have a permit and a GC, but no one in your trade yet. First brief free.">
 <meta property="og:url" content="https://bidwitness.com/">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://bidwitness.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="BidWitness — Chicago construction leads from permit records">
 <meta name="twitter:description" content="Jobs with a permit and a GC named, but nobody in your trade yet. First brief free.">
-<meta name="twitter:image" content="https://bidwitness.com/android-chrome-512.png">
+<meta name="twitter:image" content="https://bidwitness.com/og-image.jpg">
 </head>
 <body>
+<script>document.body.className+=' js';</script>
 
 <nav><div class="wrap">
-  <div class="logo">Bid<span>Witness</span></div>
-  <a class="navlink" href="#pricing">Pricing</a>
+  <a class="logo" href="/">
+    <span class="mark" aria-hidden="true">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 10.5V1.5h4.2c1.5 0 2.4.8 2.4 2 0 .9-.5 1.6-1.2 1.9 1 .2 1.7 1 1.7 2.2 0 1.7-1.2 2.9-3 2.9H1Z" fill="#fff"/></svg>
+    </span>
+    <b>Bid<span>Witness</span></b>
+  </a>
+  <div class="navright">
+    <a class="navlink" href="#how">How it works</a>
+    <a class="navlink" href="#pricing">Pricing</a>
+    <a class="navlink" href="sample-brief.html">Sample brief</a>
+    <a class="navcta" href="#request">Free brief</a>
+  </div>
 </div></nav>
 
-<header><div class="wrap">
-  <div class="eyebrow">Live permit intelligence</div>
-  <h1>Every job in your city that has a permit — and <em>nobody in your trade</em> attached.</h1>
-  <p class="dek">
-    Contractors read permit filings one at a time and miss the ones that matter.
-    BidWitness reads every filing in your metro, finds the jobs where your trade slot
-    is still empty, and emails you the shortlist every Monday.
-  </p>
-  <a class="cta" href="#pricing">Get this week's brief free</a>
-  <div class="cta-sub">No contract. No setup call. Cancel in one click.</div>
-      <div class="cta-sub" style="margin-top:8px;"><a href="sample-brief.html" style="color:#0b5fff;">See this week's Chicago roofing brief &rarr;</a></div>
-</div></header>
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="dot"></span>Live permit intelligence</div>
+      <h1>Every job in your city that has a permit — and <em>nobody in your trade</em> attached.</h1>
+      <p class="dek">
+        Contractors read permit filings one at a time and miss the ones that matter.
+        BidWitness reads every filing in your metro, finds the jobs where your trade slot
+        is still empty, and emails you the shortlist every Monday.
+      </p>
+      <div class="cta-row">
+        <a class="cta blue" href="#request">Get this week's brief free</a>
+        <a class="textlink" href="sample-brief.html">See a real Chicago brief &rarr;</a>
+      </div>
+      <div class="cta-sub">No contract. No setup call. Cancel in one click.</div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="shot">
+        <span class="tag tl">Chicago &middot; 30 days</span>
+        <img src="hero-site.jpg" width="1100" height="1380" alt="Steel frame of a mid-rise under construction at dusk, with a tower crane overhead" fetchpriority="high">
+      </div>
+      <div class="leadcard" aria-hidden="true">
+        <div class="hdr"><span>Permit issued</span><span class="pill">4 slots open</span></div>
+        <div class="addr">1331 S Wells St</div>
+        <div class="meta">New construction &middot; $94,000,000 &middot; GC named</div>
+        <div class="slots">
+          <span class="slot taken">Mason</span>
+          <span class="slot open">Roofer</span>
+          <span class="slot open">Electrical</span>
+          <span class="slot taken">Excavation</span>
+          <span class="slot open">HVAC</span>
+          <span class="slot open">Plumbing</span>
+        </div>
+        <div class="foot"><span>Your brief, Monday 6am</span><b>78 jobs</b></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="wrap"><div class="proof">
   <div><b id="stat-jobs">78</b><i>Open jobs, one city, 30 days</i></div>
@@ -172,7 +451,8 @@
   <div><b>0</b><i>Ad spend required</i></div>
 </div></div>
 
-<section><div class="wrap">
+<section><div class="wrap rv">
+  <div class="kicker">The difference</div>
   <h2>Everyone else sells you the haystack.</h2>
   <p class="lede">
     Permit data has been for sale for twenty years. It's sold as raw records — thousands
@@ -181,7 +461,7 @@
   </p>
 
   <table class="compare">
-    <tr><th>What you get</th><th>Typical permit feed</th><th>BidWitness</th></tr>
+    <tr><th>What you get</th><th>Typical permit feed</th><th class="us">BidWitness</th></tr>
     <tr><td>Raw permit records</td><td class="them">Yes — 2,000+ rows/week</td><td class="us">Yes, but pre-filtered</td></tr>
     <tr><td>Filtered to your trade</td><td class="them">No</td><td class="us">Yes</td></tr>
     <tr><td>Filtered to your value floor</td><td class="them">No</td><td class="us">Yes</td></tr>
@@ -190,9 +470,10 @@
     <tr><td>Price</td><td class="them">$20–$599/mo</td><td class="us">$299/mo</td></tr>
   </table>
 
-  <div class="quote">
+  <div class="permit">
+    <div class="ph"><b>Example</b> One filing, read properly</div>
     <div class="big">
-      The permit for <code>1331 S WELLS ST</code> is a $94,000,000 job.
+      The permit for <code>1331 S WELLS ST</code> is a <strong>$94,000,000 job.</strong>
       The filing names the owner, the architect, the expeditor, the general contractor
       and the mason. It does not name an electrician, a plumber, a roofer, a carpenter,
       an HVAC contractor or an excavator.
@@ -204,10 +485,10 @@
   </div>
 </div></section>
 
-<section style="background:var(--wash);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
-<div class="wrap">
-  <h2>How it works</h2>
-  <p class="lede">Three steps. You only see step three.</p>
+<section class="how-sec" id="how"><div class="wrap rv">
+  <div class="kicker">How it works</div>
+  <h2>Three steps. You only see step three.</h2>
+  <p class="lede">Everything before the shortlist is our work, not yours.</p>
   <div class="how">
     <div>
       <div class="n">01</div>
@@ -230,9 +511,10 @@
   </div>
 </div></section>
 
-<section id="pricing"><div class="wrap">
-  <h2>Pricing</h2>
-  <p class="lede">Priced against the job, not against other software. One foundation job pays for a decade.</p>
+<section id="pricing"><div class="wrap rv">
+  <div class="kicker">Pricing</div>
+  <h2>Priced against the job, not against software.</h2>
+  <p class="lede">One foundation job pays for a decade.</p>
   <div class="tiers">
     <div class="tier">
       <div class="plan">Single</div>
@@ -244,7 +526,7 @@
         <li>Your value floor</li>
         <li>GC name on every row</li>
       </ul>
-      <a class="cta" href="https://buy.stripe.com/cNidR98PLfl1gJ4aWPcAo01" style="display:block;margin-top:16px;text-align:center;">Start &mdash; first brief free</a>
+      <a class="cta" href="https://buy.stripe.com/cNidR98PLfl1gJ4aWPcAo01" style="display:block;margin-top:22px;text-align:center;">Start &mdash; first brief free</a>
     </div>
     <div class="tier best">
       <div class="flag">MOST COMMON</div>
@@ -257,7 +539,7 @@
         <li>Priority scoring</li>
         <li>Weekly + mid-week alerts</li>
       </ul>
-      <a class="cta" href="https://buy.stripe.com/6oU14n8PL3CjeAW3uncAo02" style="display:block;margin-top:16px;text-align:center;">Start &mdash; first brief free</a>
+      <a class="cta" href="https://buy.stripe.com/6oU14n8PL3CjeAW3uncAo02" style="display:block;margin-top:22px;text-align:center;">Start &mdash; first brief free</a>
     </div>
     <div class="tier">
       <div class="plan">Regional</div>
@@ -269,14 +551,15 @@
         <li>Custom trade definitions</li>
         <li>Direct line for data requests</li>
       </ul>
-      <a class="cta" href="https://buy.stripe.com/9B6bJ11njgp5boKfd5cAo03" style="display:block;margin-top:16px;text-align:center;">Start &mdash; first brief free</a>
+      <a class="cta" href="https://buy.stripe.com/9B6bJ11njgp5boKfd5cAo03" style="display:block;margin-top:22px;text-align:center;">Start &mdash; first brief free</a>
     </div>
   </div>
 </div></section>
 
-<section class="faq"><div class="wrap">
-  <h2>Straight answers</h2>
-  <div style="margin-top:26px">
+<section class="faq"><div class="wrap rv">
+  <div class="kicker">Straight answers</div>
+  <h2>The questions worth asking.</h2>
+  <div style="margin-top:22px">
     <details open>
       <summary>Is this just public data repackaged?</summary>
       <p>Yes — and that's the point. Every permit is public. What isn't public is the
@@ -306,38 +589,35 @@
   </div>
 </div></section>
 
-<div class="final"><div class="wrap">
+<div class="final" id="request"><div class="wrap">
+  <div class="kicker" style="color:#6f9bff;">First brief is free</div>
   <h2>See this week's jobs before you pay anything.</h2>
   <p>Tell us your city and your trade. The first brief arrives Monday. If it isn't
   worth $299, you'll know in one read.</p>
-  <form id="brief-form" action="https://formsubmit.co/hello@bidwitness.com" method="POST" style="max-width:440px;margin:22px auto 0;text-align:left;">
+  <form id="brief-form" action="https://formsubmit.co/hello@bidwitness.com" method="POST">
     <input type="hidden" name="_subject" value="BidWitness — free brief request">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
-    <label for="bf-email" style="display:block;font-size:13px;font-weight:600;margin-bottom:5px;">Work email</label>
-    <input id="bf-email" name="email" type="email" required placeholder="you@yourcompany.com"
-      style="width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:7px;font-size:15px;margin-bottom:12px;font-family:inherit;">
-    <label for="bf-city" style="display:block;font-size:13px;font-weight:600;margin-bottom:5px;">City</label>
-    <select id="bf-city" name="city" required
-      style="width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:7px;font-size:15px;margin-bottom:12px;font-family:inherit;background:#fff;">
+    <label for="bf-email">Work email</label>
+    <input id="bf-email" name="email" type="email" required placeholder="you@yourcompany.com" autocomplete="email">
+    <label for="bf-city">City</label>
+    <select id="bf-city" name="city" required>
       <option value="">Choose your metro</option>
       <option>Chicago</option>
       <option>New York</option>
       <option>Seattle</option>
       <option>Other — tell us below</option>
     </select>
-    <label for="bf-trade" style="display:block;font-size:13px;font-weight:600;margin-bottom:5px;">Your trade</label>
-    <input id="bf-trade" name="trade" required placeholder="Roofing, electrical, HVAC…"
-      style="width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:7px;font-size:15px;margin-bottom:16px;font-family:inherit;">
-    <button type="submit" class="cta" style="width:100%;border:0;cursor:pointer;font-family:inherit;font-size:15px;">Get the free brief</button>
+    <label for="bf-trade">Your trade</label>
+    <input id="bf-trade" name="trade" required placeholder="Roofing, electrical, HVAC…" style="margin-bottom:18px;">
+    <button type="submit" class="cta">Get the free brief</button>
   </form>
-  <p style="font-size:13px;color:var(--mid);margin-top:14px;">Or email us directly at
-  <strong>hello@bidwitness.com</strong> — replies come from a real person, usually same day.</p>
+  <p class="fine">Or email <strong>hello@bidwitness.com</strong> — replies come from a real person, usually same day.</p>
 </div></div>
 
 <footer><div class="wrap">
   <div>
-    BidWitness &mdash; permit intelligence for specialty contractors. Operated by Theta Work Labs LLC.
+    BidWitness &mdash; permit intelligence for specialty contractors.<br>Operated by Theta Work Labs LLC.
     <div class="disc">Built on public building records. Not affiliated with, endorsed by, or acting for any municipality.</div>
     <a class="wl-badge" href="https://websitelaunches.com/site/bidwitness.com" target="_blank" rel="noopener">
       <img src="https://websitelaunches.com/badge/bidwitness.com.svg?theme=light"
@@ -352,6 +632,16 @@
     <a href="mailto:hello@bidwitness.com">Contact</a>
   </div>
 </div></footer>
+
+<script>
+  (function(){
+    if(!('IntersectionObserver' in window)) return;
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
+    },{rootMargin:'0px 0px -8% 0px',threshold:.05});
+    document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  })();
+</script>
 
 </body>
 </html>

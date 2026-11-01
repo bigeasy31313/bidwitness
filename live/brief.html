@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your live brief — BidWitness</title>
+<meta name="description" content="A live BidWitness brief built from current city permit records: jobs with a general contractor named and your trade slot still open.">
+<meta name="robots" content="noindex,follow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0b5fff">
+<style>
+  @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/barlow-condensed-700.woff2') format('woff2');}
+  @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url('/fonts/barlow-condensed-600.woff2') format('woff2');}
+  @font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url('/fonts/inter-var.woff2') format('woff2');}
+  :root{
+    --ink:#0c1116;--mid:#5b6472;--line:#e4e8ee;--wash:#f5f7fa;--accent:#0b5fff;--tint:#eaf1ff;
+    --display:'Barlow Condensed',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#fff;color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.55;}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px;}
+  nav{border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:980px;}
+  .logo{display:flex;align-items:center;gap:9px;font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:.01em;}
+  .logo .mark{width:21px;height:21px;border-radius:5px;background:var(--accent);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .logo span{color:var(--accent);}
+  .navcta{font-size:13px;font-weight:600;color:#fff;background:var(--accent);text-decoration:none;padding:9px 16px;border-radius:7px;}
+  .navcta:hover{background:#0a54e0;}
+
+  .crumb{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mid);padding:22px 0 0;}
+  .crumb a{color:var(--mid);text-decoration:none;}
+  .crumb a:hover{color:var(--accent);}
+
+  header.brief{padding:18px 0 4px;border-bottom:1px solid var(--line);margin-bottom:0;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  h1{font-family:var(--display);font-size:clamp(34px,4.6vw,52px);font-weight:700;line-height:1.02;letter-spacing:-.005em;margin-bottom:12px;}
+  h1 em{font-style:normal;color:var(--accent);}
+  .dek{font-size:16px;color:var(--mid);max-width:640px;margin-bottom:6px;}
+  .stamp{font-size:12.5px;color:var(--mid);padding:14px 0 20px;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;}
+  .stamp b{color:var(--ink);font-weight:600;}
+
+  .notice{display:flex;gap:12px;padding:14px 16px;border-radius:9px;font-size:13.5px;line-height:1.5;margin:20px 0 0;}
+  .notice.ok{background:#eefaf1;border:1px solid #c9ecd4;color:#14653a;}
+  .notice.info{background:var(--wash);border:1px solid var(--line);color:var(--mid);}
+  .notice.warn{background:#fff8ec;border:1px solid #f3dfb8;color:#7a5312;}
+  .notice svg{flex:0 0 auto;margin-top:1px;}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-top:2px solid var(--ink);border-bottom:1px solid var(--line);margin:26px 0 0;}
+  .stat{background:#fff;padding:18px 16px 20px;}
+  .stat .k{font-family:var(--display);font-size:30px;font-weight:700;line-height:1;letter-spacing:-.01em;}
+  .stat .l{font-size:11.5px;color:var(--mid);margin-top:7px;letter-spacing:.03em;text-transform:uppercase;font-weight:500;}
+
+  .toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:22px 0 14px;}
+  .toolbar h2{font-family:var(--display);font-size:22px;font-weight:600;letter-spacing:.01em;}
+  .print{font-size:12.5px;font-weight:600;color:var(--mid);background:#fff;border:1px solid var(--line);border-radius:7px;padding:7px 13px;cursor:pointer;font-family:var(--body);}
+  .print:hover{border-color:#c9d1db;color:var(--ink);}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  thead th{text-align:left;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--mid);font-weight:600;padding:0 10px 9px;border-bottom:1px solid var(--line);}
+  tbody td{padding:13px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tbody tr:hover{background:#fafbfd;}
+  .addr{font-weight:600;color:var(--ink);display:block;line-height:1.35;}
+  .wk{display:block;color:var(--mid);font-size:12px;margin-top:3px;line-height:1.35;}
+  .gc{font-weight:500;line-height:1.35;}
+  .val{font-family:var(--display);font-size:16px;font-weight:600;white-space:nowrap;}
+  .val small{font-family:var(--body);font-size:11px;color:var(--mid);font-weight:400;}
+  .date{color:var(--mid);font-size:12.5px;white-space:nowrap;}
+  .slot{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#14653a;background:#eefaf1;border:1px solid #c9ecd4;border-radius:4px;padding:2px 6px;margin-top:5px;}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:9px;margin:18px 0 0;overflow:hidden;}
+  .steps div{background:#fff;padding:14px 16px;}
+  .steps b{display:block;font-size:12.5px;color:var(--ink);margin-bottom:3px;}
+  .steps span{font-size:11.5px;color:var(--mid);line-height:1.45;display:block;}
+  .steps .n{font-family:var(--display);font-size:11px;color:var(--accent);letter-spacing:.08em;display:block;margin-bottom:5px;}
+  @media (max-width:760px){.steps{grid-template-columns:1fr;}}
+  .why{display:block;font-size:11.5px;color:var(--mid);margin-top:5px;line-height:1.35;}
+  .slots{display:block;font-size:10.5px;color:#8b95a3;margin-top:4px;line-height:1.3;}
+  .more{font-size:12.5px;color:var(--mid);padding:14px 0 0;}
+  .skeleton{padding:26px 0;}
+  .sk{height:15px;border-radius:4px;background:linear-gradient(90deg,#eef1f5 25%,#f7f9fb 37%,#eef1f5 63%);background-size:400% 100%;animation:sh 1.4s ease infinite;margin-bottom:15px;}
+  @keyframes sh{0%{background-position:100% 50%}100%{background-position:0 50%}}
+
+  .cta-band{background:var(--ink);color:#fff;margin-top:44px;padding:34px 0;}
+  .cta-band .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+  .cta-band h3{font-family:var(--display);font-size:26px;font-weight:600;letter-spacing:.01em;}
+  .cta-band p{color:#9aa5b1;font-size:13.5px;max-width:430px;margin-top:4px;}
+  .cta-band a{background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:12px 22px;border-radius:7px;white-space:nowrap;}
+  .cta-band a:hover{background:#0a54e0;}
+
+  footer{padding:26px 0 40px;font-size:11.5px;color:var(--mid);line-height:1.6;}
+  footer a{color:var(--mid);}
+  .method{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:#7b8492;line-height:1.6;}
+
+  @media (max-width:760px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .hide-sm{display:none;}
+    table,tbody,tr,td,thead{display:block;width:100%;}
+    thead{display:none;}
+    tbody tr{padding:15px 0;border-bottom:1px solid var(--line);}
+    tbody td{border:0;padding:0 0 4px;}
+    .val{font-size:15px;}
+  }
+  @media print{
+    nav,.cta-band,.toolbar .print,.crumb{display:none;}
+    body{font-size:11px;}
+    .stats{border-top:1px solid #000;}
+    a{color:#000;text-decoration:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="logo" href="/">
+    <span class="mark" aria-hidden="true">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 21V9l6-4 6 4v12"/></svg>
+    </span>
+    <b>Bid<span>Witness</span></b>
+  </a>
+  <a class="navcta" href="/#request">Get your weekly brief</a>
+</div></nav>
+
+<div class="wrap">
+  <div class="crumb"><a href="/">&larr; BidWitness</a><span>/</span><span>Live brief</span></div>
+</div>
+
+<header class="brief"><div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Pulled live from city permit records</div>
+  <h1 id="h1">Your <em id="h1city">city</em> brief.</h1>
+  <p class="dek" id="dek">Every job permitted in your metro recently where a general contractor is named and your trade slot is still open.</p>
+  <div class="stamp">
+    <span>Metro <b id="s-city">—</b></span>
+    <span>Trade <b id="s-trade">—</b></span>
+    <span>Source <b id="s-src">—</b></span>
+    <span>Pulled <b id="s-time">—</b></span>
+  </div>
+</div></header>
+
+<main><div class="wrap">
+  <div id="banner"></div>
+  <div id="nextsteps"></div>
+
+  <div class="stats" id="stats">
+    <div class="stat"><div class="k" id="k1">—</div><div class="l">Open jobs</div></div>
+    <div class="stat"><div class="k" id="k2">—</div><div class="l">Listed value</div></div>
+    <div class="stat"><div class="k" id="k3">—</div><div class="l">Window</div></div>
+    <div class="stat"><div class="k" id="k4">—</div><div class="l">Largest job</div></div>
+  </div>
+
+  <div class="toolbar">
+    <h2 id="tbl-title">Your shortlist</h2>
+    <button class="print" onclick="window.print()">Print / save as PDF</button>
+  </div>
+
+  <div id="tablearea"><div class="skeleton">
+    <div class="sk" style="width:88%"></div><div class="sk" style="width:96%"></div>
+    <div class="sk" style="width:74%"></div><div class="sk" style="width:92%"></div>
+    <div class="sk" style="width:64%"></div><div class="sk" style="width:85%"></div>
+  </div></div>
+
+  <div class="method" id="method"></div>
+</div></main>
+
+<div class="cta-band"><div class="wrap">
+  <div>
+    <h3>This is one week. Yours lands every Monday, 6am.</h3>
+    <p>One metro, one trade, one subscriber. If a slot is taken, the listing closes.</p>
+  </div>
+  <a href="/#pricing">Start — first brief free</a>
+</div></div>
+
+<footer><div class="wrap">
+  BidWitness — permit intelligence for specialty contractors. Operated by Theta Work Labs LLC.
+  Built on public building records. Not affiliated with, endorsed by, or acting for any municipality.
+  <br><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/refunds.html">Refunds</a> · <a href="/cookies.html">Cookies</a>
+</div></footer>
+
+<script>
+(function(){
+  var qs = new URLSearchParams(location.search);
+  var rawCity = (qs.get('city')||'Chicago').trim();
+  var rawTrade = (qs.get('trade')||'roofing').trim();
+  var fromRequest = qs.get('src')==='request';
+
+  var $ = function(id){return document.getElementById(id);};
+
+  /* ---------- trade normalisation ---------- */
+  function canonical(raw){
+    var t = (raw||'').toLowerCase();
+    if(/electric/.test(t)) return 'electrical';
+    if(/plumb/.test(t)) return 'plumbing';
+    if(/hvac|heating|air[ -]?cond|mechanical|ventilat|refriger/.test(t)) return 'hvac';
+    if(/roof/.test(t)) return 'roofing';
+    if(/concrete|foundation|rebar|flatwork/.test(t)) return 'concrete';
+    if(/mason|brick|stone|tuckpoint/.test(t)) return 'masonry';
+    if(/demol|wreck/.test(t)) return 'demolition';
+    if(/solar|photovolt/.test(t)) return 'solar';
+    if(/elevator/.test(t)) return 'elevator';
+    if(/sign/.test(t)) return 'signs';
+    if(/glass|glaz|window|storefront|curtain/.test(t)) return 'glazing';
+    if(/drywall|framing|gypsum|stud/.test(t)) return 'drywall';
+    if(/paint|coat/.test(t)) return 'painting';
+    if(/floor|tile|carpet|epoxy/.test(t)) return 'flooring';
+    if(/landscap|excavat|sitework|site work|paving/.test(t)) return 'landscaping';
+    if(/fire|sprinkler|alarm/.test(t)) return 'fire';
+    if(/general|^gc$|builder/.test(t)) return 'general';
+    return 'other';
+  }
+  var LABEL = {electrical:'Electrical',plumbing:'Plumbing',hvac:'HVAC & mechanical',roofing:'Roofing',
+    concrete:'Concrete',masonry:'Masonry',demolition:'Demolition',solar:'Solar',elevator:'Elevator',
+    signs:'Signage',glazing:'Glazing & windows',drywall:'Drywall & framing',painting:'Painting',
+    flooring:'Flooring',landscaping:'Sitework & landscaping',fire:'Fire protection',
+    general:'General contracting',other:'trade'};
+
+  /* ---------- relevance: does this job actually need your trade? ---------- */
+  var CONSTRUCTION_TYPES = /new construction|construct|renovat|alteration|alter |nonstructural interior|interior work|build-?out|tenant improvement|demoli|addition|remodel/i;
+
+  var SIGNALS = {
+    electrical: {re:/electric|service (upgrade|change)|panel|circuit|conduit|wiring|rewire|lighting|outlet|transformer|generator|switchgear|photovolt|solar|ups |low voltage/i,
+                 why:'Electrical scope in filing'},
+    plumbing:   {re:/plumb|water (service|main|heater)|sewer|drain|gas (line|piping)|fixture|boiler|backflow|storm|sanitary/i,
+                 why:'Plumbing scope in filing'},
+    hvac:       {re:/hvac|heat(ing)?|furnace|air[ -]?cond|mechanical|ventilat|duct|refriger|rooftop unit|make-?up air/i,
+                 why:'Mechanical scope in filing'},
+    roofing:    {re:/roof|reroof|re-roof|shingle|membrane|gutter|flashing|parapet|waterproof/i,
+                 why:'Roofing scope in filing'},
+    masonry:    {re:/mason|brick|tuckpoint|stone|cmu|parapet|facade|facade|chimney/i,
+                 why:'Masonry scope in filing'},
+    concrete:   {re:/concrete|foundation|slab|footing|rebar|flatwork|caisson|pier/i,
+                 why:'Concrete scope in filing'},
+    demolition: {re:/demol|wreck|interior strip|gut/i, why:'Demolition scope in filing'},
+    solar:      {re:/solar|photovolt|\bpv\b|inverter|array/i, why:'Solar scope in filing'},
+    elevator:   {re:/elevator|lift|escalator/i, why:'Conveyance scope in filing'},
+    signs:      {re:/sign|signage|monument|pylon/i, why:'Signage scope in filing'},
+    glazing:    {re:/glass|glaz|window|storefront|curtain ?wall|mullion/i, why:'Glazing scope in filing'},
+    drywall:    {re:/drywall|gypsum|framing|stud|partition|dry wall/i, why:'Framing scope in filing'},
+    painting:   {re:/paint|coating|finish|stain/i, why:'Finishing scope in filing'},
+    flooring:   {re:/floor|tile|carpet|epoxy|hardwood|terrazzo/i, why:'Flooring scope in filing'},
+    landscaping:{re:/landscap|excavat|site ?work|grading|paving|asphalt|fence|retaining/i, why:'Sitework scope in filing'},
+    fire:       {re:/fire|sprinkler|alarm|standpipe|suppression/i, why:'Fire protection scope in filing'},
+    general:    {re:/construct|renovat|alteration|build/i, why:'Whole-scope filing'}
+  };
+
+  /* score a job: 3 = explicit scope, 2 = construction filing that carries all slots, 1 = weak */
+  function relevance(trade, workType, workDesc){
+    var blob = ((workType||'')+' '+(workDesc||''));
+    var sig = SIGNALS[trade];
+    if(trade==='other') return {score:0, why:''};
+    if(trade==='general') return {score: CONSTRUCTION_TYPES.test(blob)?3:1, why:'Multi-trade job'};
+    if(sig && sig.re.test(blob)) return {score:3, why:sig.why};
+    if(CONSTRUCTION_TYPES.test(blob)) return {score:2, why:'Construction filing — trade slots unassigned'};
+    return {score:0, why:''};
+  }
+
+  var trade = canonical(rawTrade);
+  var tradeLabel = LABEL[trade] || 'trade';
+  var tradeUnknown = (trade==='other');
+
+  /* ---------- helpers ---------- */
+  function daysAgo(n){var d=new Date();d.setUTCDate(d.getUTCDate()-n);return d.toISOString().slice(0,10)+'T00:00:00';}
+  function money(v){
+    var n=parseFloat(v||0);
+    if(!isFinite(n)||n<=0) return '—';
+    if(n>=1e9) return '$'+(n/1e9).toFixed(1).replace(/\.0$/,'')+'B';
+    if(n>=1e6) return '$'+(n/1e6).toFixed(1).replace(/\.0$/,'')+'M';
+    if(n>=1e3) return '$'+Math.round(n/1e3)+'K';
+    return '$'+Math.round(n);
+  }
+  function fmtDate(s){
+    if(!s) return '—';
+    var d=new Date(s.length<=10? s+'T12:00:00' : s);
+    if(isNaN(d)) return s;
+    return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  }
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function titleCase(s){return String(s||'').replace(/\w\S*/g,function(w){return w.charAt(0).toUpperCase()+w.slice(1).toLowerCase();});}
+  function api(url){return fetch(url).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); });}
+  function qs_(o){return new URLSearchParams(o).toString();}
+  function dedupe(rows){
+    var by={};
+    rows.forEach(function(r){
+      var k=r.addr.toUpperCase();
+      if(!by[k] || r.val>by[k].val || (r.score>by[k].score && r.val>=by[k].val)) by[k]=r;
+    });
+    var out=[]; for(var k in by) out.push(by[k]); return out;
+  }
+
+  /* ---------- city registry ---------- */
+  var cityKey = (rawCity||'').toLowerCase();
+  var cityUnknown = !cityKey || /^other/.test(cityKey) || /tell us below/.test(cityKey);
+  var CITY = cityUnknown ? 'other'
+           : /chicago/.test(cityKey) ? 'chicago'
+           : /new york|nyc|brooklyn|queens|manhattan|bronx|staten/.test(cityKey) ? 'nyc'
+           : /seattle/.test(cityKey) ? 'seattle'
+           : 'other';
+  var CITYNAME = {chicago:'Chicago',nyc:'New York',seattle:'Seattle',other:(cityUnknown?'your metro':rawCity)};
+  var displayCity = CITYNAME[CITY];
+
+  $('s-city').textContent = displayCity;
+  $('s-trade').textContent = (LABEL[trade]||rawTrade) + (trade==='other' ? ' ('+rawTrade+')' : '');
+  $('h1').innerHTML = displayCity + ': every job where <em>your slot is open</em>.';
+  if(trade!=='other') $('dek').textContent = 'Live permit records for '+displayCity+', filtered to jobs where a general contractor is named and '
+     +(trade==='general'?'no general contractor':'no '+tradeLabel.toLowerCase()+' contractor')+' is attached yet.';
+  $('s-time').textContent = new Date().toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:'America/New_York'})+' ET';
+
+  /* ---------- CHICAGO ---------- */
+  var CHI = 'https://data.cityofchicago.org/resource/ydr8-5enu.json';
+  var CHI_ROLES = {
+    electrical:['ELECTRIC'], plumbing:['PLUMB'], hvac:['HEATING','VENTILATION','REFRIGERATION'],
+    masonry:['MASON'], elevator:['ELEVATOR'], demolition:['WRECKING'], signs:['SIGN'],
+    fire:['PRIVATE ALARM'],
+    roofing:[], solar:[], concrete:[], glazing:[], drywall:[], painting:[], flooring:[], landscaping:[], general:[], other:[]
+  };
+  var CHI_NAMES = {
+    electrical:['ELECTRIC'], plumbing:['PLUMB'], hvac:['HEATING','HVAC','MECHANICAL','AIR COND','SHEET METAL'],
+    masonry:['MASON','BRICK','TUCKPOINT'], elevator:['ELEVATOR'], demolition:['WRECK','DEMOLITION'],
+    signs:['SIGN '], roofing:['ROOF'], solar:['SOLAR'], concrete:['CONCRETE','FOUNDATION'],
+    glazing:['GLASS','GLAZING','WINDOW'], drywall:['DRYWALL','FRAMING','DRY WALL'],
+    painting:['PAINT','COATING'], flooring:['FLOOR','TILE','CARPET'],
+    landscaping:['LANDSCAP','EXCAVAT','SITEWORK'], fire:['FIRE','SPRINKLER','ALARM'],
+    general:[], other:[]
+  };
+  function chiWhere(days){
+    var p = ["issue_date > '"+daysAgo(days)+"'",
+             "work_type NOT IN ('Administrative Change','Monthly Maintenance Permit')"];
+    if(trade==='general'){
+      var noGC=[];for(var j=1;j<=4;j++)noGC.push("(contact_"+j+"_type IS NULL OR contact_"+j+"_type NOT LIKE '%GENERAL CONTRACTOR%')");
+      return p.concat(noGC).join(' AND ');
+    }
+    var gc=[];for(var k=1;k<=4;k++)gc.push("contact_"+k+"_type like '%GENERAL CONTRACTOR%'");
+    p.push('('+gc.join(' OR ')+')');
+    (CHI_ROLES[trade]||[]).forEach(function(r){ for(var i=1;i<=4;i++) p.push("(contact_"+i+"_type IS NULL OR contact_"+i+"_type NOT LIKE '%"+r+"%')"); });
+    (CHI_NAMES[trade]||[]).forEach(function(n){ for(var i=1;i<=4;i++) p.push("(contact_"+i+"_name IS NULL OR contact_"+i+"_name NOT LIKE '%"+n+"%')"); });
+    return p.join(' AND ');
+  }
+  function loadChicago(){
+    var where = chiWhere(30);
+    var fields = ['id','issue_date','street_number','street_direction','street_name','work_type','work_description','reported_cost',
+      'contact_1_type','contact_1_name','contact_2_type','contact_2_name','contact_3_type','contact_3_name','contact_4_type','contact_4_name'].join(',');
+    return Promise.all([
+      api(CHI+'?'+qs_({$where:where,$order:'issue_date DESC',$limit:'600',$select:fields})),
+      api(CHI+'?'+qs_({$select:'count(*)',$where:where})).catch(function(){return null;})
+    ]).then(function(res){
+      var rows=[];
+      res[0].forEach(function(r){
+        var gc='',owner='';
+        for(var i=1;i<=4;i++){
+          var t=(r['contact_'+i+'_type']||'').toUpperCase(), n=r['contact_'+i+'_name']||'';
+          if(!n) continue;
+          if(/GENERAL CONTRACTOR/.test(t) && !gc) gc=n;
+          if(/^OWNER/.test(t) && !owner) owner=n;
+        }
+        var rel = relevance(trade, r.work_type, r.work_description);
+        if(rel.score<1) return;
+        var att=[];
+        for(var q=1;q<=4;q++){
+          var tt=(r['contact_'+q+'_type']||'').toUpperCase();
+          if(/ELECTRIC/.test(tt)) att.push('Electrical');
+          else if(/PLUMB/.test(tt)) att.push('Plumbing');
+          else if(/HEATING|VENTILATION|REFRIGERATION/.test(tt)) att.push('HVAC');
+          else if(/MASON/.test(tt)) att.push('Masonry');
+        }
+        att = att.filter(function(v,i,a){return a.indexOf(v)===i && v.toLowerCase()!==tradeLabel.toLowerCase();});
+        rows.push({
+          attached:att,
+          addr:[r.street_number,r.street_direction,titleCase(r.street_name)].filter(Boolean).join(' '),
+          work:r.work_type||'Permit', gc:gc||owner||'—',
+          val:parseFloat(r.reported_cost||0)||0, date:r.issue_date,
+          score:rel.score, why:rel.why
+        });
+      });
+      rows = dedupe(rows);
+      var total = res[1] && res[1][0] ? parseInt(res[1][0].count,10) : rows.length;
+      return {rows:rows,total:total,source:'Chicago Dept. of Buildings',days:30};
+    });
+  }
+
+  /* ---------- NEW YORK ---------- */
+  var NY = 'https://data.cityofnewyork.us/resource/rbx6-tga4.json';
+  var NYE = 'https://data.cityofnewyork.us/resource/dm9a-ab7w.json';
+  var NY_WT = {plumbing:['Plumbing'],hvac:['Mechanical Systems','Boiler Equipment'],fire:['Sprinklers','Standpipe'],
+    solar:['Solar'],signs:['Sign'],demolition:['Full Demolition'],masonry:['Structural']};
+  function loadNYC(){
+    var since = daysAgo(45);
+    var base = NY+'?'+qs_({$where:"work_type='General Construction' AND permit_status='Permit Issued' AND approved_date>'"+since+"'",
+      $order:'estimated_job_costs DESC',$limit:'1200',
+      $select:'job_filing_number,house_no,street_name,borough,approved_date,estimated_job_costs,applicant_business_name,owner_business_name'});
+    var setUrl=null;
+    if(trade==='electrical'){
+      setUrl = NYE+'?'+qs_({$where:"filing_date>'"+since+"'",$select:'job_number',$limit:'50000'});
+    } else if(NY_WT[trade]){
+      setUrl = NY+'?'+qs_({$where:"work_type in ("+NY_WT[trade].map(function(w){return "'"+w+"'";}).join(',')+") AND approved_date>'"+since+"'",
+        $select:'job_filing_number',$limit:'50000'});
+    }
+    return Promise.all([api(base), setUrl?api(setUrl).catch(function(){return [];}):Promise.resolve([])])
+    .then(function(res){
+      var attached={};
+      res[1].forEach(function(x){var k=String(x.job_number||x.job_filing_number||'').split('-')[0]; if(k) attached[k]=1;});
+      var rows=[];
+      res[0].forEach(function(r){
+        var key=String(r.job_filing_number||'').split('-')[0];
+        if(attached[key]) return;
+        var rel = relevance(trade,'General Construction','');
+        rows.push({addr:[r.house_no,titleCase(r.street_name),r.borough?('· '+titleCase(r.borough)):''].filter(Boolean).join(' '),
+          work:'General construction', gc:r.applicant_business_name||r.owner_business_name||'—',
+          val:parseFloat(r.estimated_job_costs||0)||0, date:r.approved_date,
+          score: trade==='general'?3:rel.score,
+          why: trade==='general' ? 'Whole-scope filing'
+               : (trade==='electrical' ? 'No electrical filing on this job' : 'No '+tradeLabel.toLowerCase()+' permit on this job')});
+      });
+      rows = dedupe(rows);
+      return {rows:rows,total:rows.length,source:'NYC DOB · DOB NOW',days:45};
+    });
+  }
+
+  /* ---------- SEATTLE (address join) ---------- */
+  var SEA_BUILD='https://cos-data.seattle.gov/resource/8tqq-u7ib.json';
+  var SEA_TRADE={electrical:'c4tj-daue',hvac:'c87v-5hwh',plumbing:'c87v-5hwh',fire:'c87v-5hwh'};
+  function loadSeattle(){
+    var since = daysAgo(60).slice(0,10);
+    var bUrl = SEA_BUILD+'?'+qs_({$where:"issueddate>'"+since+"'",$order:'issueddate DESC',$limit:'1500',
+      $select:'permitnum,issueddate,originaladdress1,estprojectcost,permittypedesc,description'});
+    var tId = SEA_TRADE[trade];
+    var tUrl = tId ? 'https://cos-data.seattle.gov/resource/'+tId+'.json?'+qs_({
+      $where:"issueddate>'"+since+"'",$select:'originaladdress1',$limit:'50000'}) : null;
+    return Promise.all([api(bUrl), tUrl?api(tUrl).catch(function(){return [];}):Promise.resolve([])])
+    .then(function(res){
+      var attached={};
+      res[1].forEach(function(x){ if(x.originaladdress1) attached[x.originaladdress1.toUpperCase()]=1; });
+      var rows=[];
+      res[0].forEach(function(r){
+        var a=(r.originaladdress1||'').toUpperCase();
+        if(!a) return;
+        if(tId && attached[a]) return;
+        var rel = relevance(trade, r.permittypedesc||'', r.description||'');
+        if(rel.score<1) return;
+        rows.push({addr:titleCase(r.originaladdress1), work:r.permittypedesc||'Building permit', gc:'Not published',
+          val:parseFloat(r.estprojectcost||0)||0, date:r.issueddate, score:rel.score,
+          why: (trade==='general' ? 'Whole-scope filing'
+                : 'No '+tradeLabel.toLowerCase()+' permit at this address')});
+      });
+      rows = dedupe(rows);
+      return {rows:rows,total:rows.length,source:'Seattle Dept. of Construction & Inspections',days:60, noGCName:true};
+    });
+  }
+
+  /* ---------- render ---------- */
+  function banner(html,kind){ $('banner').innerHTML='<div class="notice '+kind+'">'+html+'</div>'; }
+  if(fromRequest){
+    banner('<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><b>Request received.</b> Below is a live sample built for '+esc(displayCity)+' · '+esc(LABEL[trade]||rawTrade)+', pulled from public permit records a moment ago. Your full brief follows by email Monday morning.</div>','ok');
+  }
+
+  if(fromRequest){
+    $('nextsteps').innerHTML='<div class="steps">'
+      +'<div><span class="n">01</span><b>We confirm your market</b><span>We check your trade genuinely has open slots in '+esc(displayCity)+'. If it does not, you are not charged.</span></div>'
+      +'<div><span class="n">02</span><b>Your first brief is built</b><span>The full set behind this sample — every open slot in the last 30 days, with the filing linked.</span></div>'
+      +'<div><span class="n">03</span><b>It arrives Monday, 6am</b><span>Sent to the address you gave us, then every Monday while you are subscribed.</span></div>'
+      +'</div>';
+  }
+
+  function renderTable(data){
+    var rows = data.rows.slice().sort(function(a,b){
+      if(b.score!==a.score) return b.score-a.score;
+      return b.val-a.val;
+    });
+    $('s-src').textContent = data.source;
+    var shown = rows.slice(0,60);
+    var totalVal = shown.reduce(function(a,r){return a+r.val;},0);
+    var largest = rows.reduce(function(a,r){return Math.max(a,r.val);},0);
+    $('k1').textContent = data.rows.length.toLocaleString();
+    $('k2').textContent = money(totalVal);
+    $('k3').textContent = data.days+' days';
+    $('k4').textContent = money(largest);
+
+    var head = '<table><thead><tr><th style="width:29%">Job</th><th style="width:23%">General contractor</th>'
+             + '<th style="width:12%">Value</th><th style="width:11%">Issued</th><th style="width:25%">Why you fit</th></tr></thead><tbody>';
+    var body = shown.map(function(r){
+      return '<tr>'
+        + '<td><span class="addr">'+esc(r.addr)+'</span><span class="wk">'+esc(r.work)+'</span></td>'
+        + '<td><span class="gc">'+esc(r.gc)+'</span></td>'
+        + '<td><span class="val">'+money(r.val)+'</span></td>'
+        + '<td><span class="date">'+fmtDate(r.date)+'</span></td>'
+        + '<td><span class="slot">Slot open</span><span class="why">'+esc(r.why)+'</span>'
+        + (r.attached && r.attached.length ? '<span class="slots">Attached: '+esc(r.attached.join(', '))+'</span>' : '')
+        + '</td>'
+        + '</tr>';
+    }).join('');
+    var extra='';
+    if(rows.length>shown.length) extra='<p class="more">Showing the '+shown.length+' strongest of '+rows.length+' matching jobs. Your emailed brief carries the full list.</p>';
+    $('tablearea').innerHTML = head+body+'</tbody></table>'+extra;
+
+    $('method').innerHTML = '<b>How this was built.</b> Queried live against '+esc(data.source)+' at '+esc($('s-time').textContent)+'. '
+      + 'A job is listed only if a permit was issued in the last '+data.days+' days, a general contractor is named on the filing, '
+      + (trade==='general' ? 'and no general contractor is attached yet.'
+         : 'no '+esc(tradeLabel.toLowerCase())+' contractor appears in the filing’s trade slots, and the filing shows '+esc(tradeLabel.toLowerCase())+' scope or whole-building construction. ')
+      + 'Ranked by strength of fit, then job value. Public records can contain filing errors — verify scope before pricing.'
+      + (data.noGCName ? ' Seattle does not publish the contractor name in its building-permit feed, so that column reads “Not published” rather than showing a guess.' : '');
+  }
+
+  var loaders = {chicago:loadChicago, nyc:loadNYC, seattle:loadSeattle};
+  var loader = loaders[CITY];
+  if(tradeUnknown){ unknownTrade(); }
+  else if(!loader){ unsupported(); }
+  else {
+    loader().then(function(data){
+      if(!data.rows.length){
+        $('stats').style.display='none';
+        $('tbl-title').textContent='No open slots in this window';
+        $('tablearea').innerHTML='<div class="notice info" style="margin:0">No qualifying jobs came back for '+esc(displayCity)+' · '+esc(tradeLabel)+' in the current window. Permit volume moves week to week — this can happen on a quiet stretch for a narrow trade.</div>';
+        return;
+      }
+      renderTable(data);
+    }).catch(function(){
+      $('stats').style.display='none';
+      $('tbl-title').textContent='Could not reach the permit feed';
+      $('tablearea').innerHTML='<div class="notice warn" style="margin:0"><div><b>The city feed did not respond.</b> This is a live query to '+esc(displayCity)+'’s public records, which occasionally rate-limits. Reload to try again.</div></div>';
+      $('method').innerHTML='Briefs are generated on request from live public records, so they need a working connection to the city data portal.';
+    });
+  }
+
+  function unknownTrade(){
+    $('stats').style.display='none';
+    $('tbl-title').textContent='We build this one by hand';
+    $('s-src').textContent='Manual review';
+    $('dek').textContent='Your trade is not one we map to a permit category automatically, so we will not pretend a generic list is your brief.';
+    $('tablearea').innerHTML='<div class="notice warn" style="margin:0"><div>'
+      +'<b>“'+esc(rawTrade)+'” needs a human.</b> City permit systems record trades in their own vocabulary, and we would rather build your brief by hand '
+      +'than show you a list that has nothing to do with your work. A person will map your trade to the right permit codes in '+esc(displayCity)+' and send the first brief by email. '
+      +'You are not charged until we confirm your trade has open slots.</div></div>';
+    $('method').innerHTML='<b>Trades we generate live today:</b> electrical, plumbing, HVAC and mechanical, roofing, masonry, concrete, demolition, solar, elevator, signage, glazing, drywall and framing, painting, flooring, sitework, fire protection, general contracting. '
+      +'<a href="/live/brief.html?city=Chicago&trade=electrical">See a live electrical brief</a>.';
+  }
+
+  function unsupported(){
+    $('stats').style.display='none';
+    $('tbl-title').textContent='This metro is built by hand';
+    $('s-src').textContent='Manual';
+    $('tablearea').innerHTML='<div class="notice warn" style="margin:0"><div><b>'+esc(cityUnknown?'Your metro':displayCity)+' has no automated feed yet.</b> We only promise a live brief where the city publishes machine-readable permits with contractor roles. Yours will be built and emailed — it just takes a person. You are not charged until we confirm open slots.</div></div>';
+    $('method').innerHTML='<a href="/live/brief.html?city=Chicago&trade='+encodeURIComponent(rawTrade)+'">See a live Chicago '+esc(tradeLabel.toLowerCase())+' brief</a> to judge the format.';
+  }
+
+})();
+</script>
+</body>
+</html>

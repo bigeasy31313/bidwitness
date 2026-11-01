@@ -438,7 +438,7 @@
   <div class="navright">
     <a class="navlink" href="#how">How it works</a>
     <a class="navlink" href="#pricing">Pricing</a>
-    <a class="navlink" href="sample-brief.html">Sample brief</a>
+    <a class="navlink" href="/live/brief.html?city=Chicago&amp;trade=roofing">Sample brief</a>
     <a class="navcta" href="#request">Free brief</a>
   </div>
 </div></nav>
@@ -455,7 +455,7 @@
       </p>
       <div class="cta-row">
         <a class="cta blue" href="#request">Get this week's brief free</a>
-        <a class="textlink" href="sample-brief.html">See a real Chicago brief &rarr;</a>
+        <a class="textlink" href="/live/brief.html?city=Chicago&amp;trade=roofing">See a live Chicago brief &rarr;</a>
       </div>
       <div class="cta-sub">No contract. No setup call. Cancel in one click.</div>
     </div>
@@ -637,7 +637,7 @@
     <input type="hidden" name="_subject" value="BidWitness — free brief request">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_next" value="https://bidwitness.com/thanks.html">
+    <input type="hidden" name="_next" id="bf-next" value="https://bidwitness.com/thanks.html">
     <input type="hidden" name="_replyto" value="email">
     <label for="bf-email">Work email</label>
     <input id="bf-email" name="email" type="email" required placeholder="you@yourcompany.com" autocomplete="email">
@@ -649,10 +649,41 @@
       <option>Seattle</option>
       <option>Other — tell us below</option>
     </select>
+    <label for="bf-metro" id="bf-metro-label" style="display:none">Which metro?</label>
+    <input id="bf-metro" name="metro" type="text" placeholder="e.g. Dallas, Phoenix, Boston" style="display:none;margin-bottom:18px;">
     <label for="bf-trade">Your trade</label>
     <input id="bf-trade" name="trade" required placeholder="Roofing, electrical, HVAC…" style="margin-bottom:18px;">
     <button type="submit" class="cta">Get the free brief</button>
   </form>
+  <script>
+  (function(){
+    var f=document.getElementById('brief-form');
+    if(!f) return;
+    var sel=f.querySelector('[name=city]');
+    var metroInput=f.querySelector('[name=metro]');
+    var metroLabel=document.getElementById('bf-metro-label');
+    function toggleMetro(){
+      var isOther=/^Other/i.test((sel||{}).value||'');
+      if(metroInput){ metroInput.style.display=isOther?'block':'none'; metroInput.required=isOther; }
+      if(metroLabel){ metroLabel.style.display=isOther?'block':'none'; }
+    }
+    if(sel) sel.addEventListener('change',toggleMetro);
+    toggleMetro();
+    f.addEventListener('submit',function(){
+      var sel=f.querySelector('[name=city]');
+      var city=(sel||{}).value||'Chicago';
+      var other=(f.querySelector('[name=metro]')||{}).value||'';
+      if(/^Other/i.test(city)&&other.trim()) city=other.trim();
+      var trade=(f.querySelector('[name=trade]')||{}).value||'';
+      var next='https://bidwitness.com/live/brief.html'
+        +'?city='+encodeURIComponent(city)
+        +'&trade='+encodeURIComponent(trade)
+        +'&src=request';
+      var n=document.getElementById('bf-next');
+      if(n) n.value=next;
+    });
+  })();
+  </script>
   <p class="fine">Or email <strong>hello@bidwitness.com</strong> — replies come from a real person, usually same day.</p>
 </div></div>
 

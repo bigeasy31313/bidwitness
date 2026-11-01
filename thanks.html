@@ -83,7 +83,7 @@
     </div>
     <div class="step">
       <div class="n">02</div>
-      <p><strong>Your first brief is built.</strong> Jobs from the last 30 days with a permit issued, a general contractor named, and nobody in your trade attached — with the GC's direct number on every row.</p>
+      <p><strong>Your first brief is built.</strong> Jobs from the last 30 days with a permit issued, a general contractor named, and nobody in your trade attached — with the full filing record linked so you can verify scope before you call.</p>
     </div>
     <div class="step">
       <div class="n">03</div>
@@ -93,7 +93,7 @@
 
   <div class="card">
     <p><strong>Nothing arrived by Monday afternoon?</strong> Check your spam folder first — new senders often land there. If it's still missing, email <a href="mailto:hello@bidwitness.com">hello@bidwitness.com</a> and it will be resent the same day.</p>
-    <p>While you wait, you can read a <a href="/sample-brief.html">full Chicago roofing brief</a> to see exactly what the format looks like.</p>
+    <p id="sampleline">While you wait, you can <a href="/sample-brief.html" id="samplelink">see what a complete brief looks like</a>.</p>
   </div>
 
   <a class="cta" href="/">Back to BidWitness</a>
@@ -110,5 +110,21 @@
   </div>
 </div></footer>
 
-</body>
-</html>
+<script>
+(function(){
+  var qs=new URLSearchParams(location.search);
+  var city=qs.get('city')||'';
+  var trade=qs.get('trade')||'';
+  if(city||trade){
+    var href='/live/brief.html?city='+encodeURIComponent(city||'Chicago')+'&trade='+encodeURIComponent(trade||'roofing')+'&src=request';
+    location.replace(href);
+    return;
+  }
+  var link=document.getElementById('samplelink');
+  var line=document.getElementById('sampleline');
+  if(link&&line){
+    line.innerHTML='While you wait, you can <a href="/live/brief.html?city=Chicago&trade=roofing">see a live brief pulled from current permit records</a>.';
+  }
+})();
+</script>
+</body></html>

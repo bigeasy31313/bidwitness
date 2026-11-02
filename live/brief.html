@@ -170,8 +170,8 @@
 
 <div class="cta-band"><div class="wrap">
   <div>
-    <h3>This is one week. Yours lands every Monday, 6am.</h3>
-    <p>One metro, one trade, one subscriber. If a slot is taken, the listing closes.</p>
+    <h3 id="cta-h">This is one week. Yours lands every Monday, 6am.</h3>
+    <p id="cta-p">One metro, one trade, one subscriber. If a slot is taken, the listing closes.</p>
   </div>
   <a href="/#pricing">Start — first brief free</a>
 </div></div>
@@ -429,6 +429,13 @@
   var displayCity = CITYDEF ? CITYDEF.name : (rawCity||'your metro');
 
   function banner(html,kind){ $('banner').innerHTML='<div class="notice '+kind+'">'+html+'</div>'; }
+
+  /* the closing band must not promise Monday automation to a hand-built market */
+  if(CITYDEF && CITYDEF.manual){
+    var ch=document.getElementById('cta-h'), cp=document.getElementById('cta-p');
+    if(ch) ch.textContent='This one is built by hand. Two business days, not next Monday.';
+    if(cp) cp.textContent='Mississippi has no permit feed to automate, so a person assembles it. Same shortlist, same source links.';
+  }
   if(fromRequest){
     var okMsg = (CITYDEF && !CITYDEF.manual)
       ? '<b>Request received.</b> Below is a live sample built for '+esc(displayCity)+' · '+esc(LABEL[trade]||rawTrade)+', pulled from public permit records a moment ago.'

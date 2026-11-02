@@ -431,10 +431,11 @@
   function banner(html,kind){ $('banner').innerHTML='<div class="notice '+kind+'">'+html+'</div>'; }
 
   /* the closing band must not promise Monday automation to a hand-built market */
-  if(CITYDEF && CITYDEF.manual){
+  if(!CITYDEF || CITYDEF.manual){
     var ch=document.getElementById('cta-h'), cp=document.getElementById('cta-p');
     if(ch) ch.textContent='This one is built by hand. Two business days, not next Monday.';
-    if(cp) cp.textContent='Mississippi has no permit feed to automate, so a person assembles it. Same shortlist, same source links.';
+    if(cp) cp.textContent=(CITYDEF ? esc(displayCity)+' has no permit feed to automate' : 'That metro has no permit feed we can automate')
+      +', so a person assembles it. Same shortlist, same source links.';
   }
   if(fromRequest){
     var okMsg = (CITYDEF && !CITYDEF.manual)

@@ -406,6 +406,14 @@
                   elevator:"PERMIT_SUBTYPE_NAME like '%ELEVATOR%'",
                   solar:"PERMIT_SUBTYPE_NAME like '%SOLAR%'"},
       tradeTypeCol:'PERMIT_SUBTYPE_NAME'
+    },
+    {
+      id:'mississippi', name:'Mississippi', short:'Mississippi',
+      match:/mississippi|\bms\b|jackson,? ms|gulfport|biloxi|hattiesburg|southaven|tupelo|meridian|vicksburg|olive branch|desoto|hinds|harrison county|jackson county ms/,
+      manual:true,                      // no machine-readable permit feed exists in MS
+      src:'Manual review · Mississippi has no statewide permit registry',
+      days:14, phone:false, gcName:false,
+      manualNote:'Mississippi has no mandatory statewide building code, so each of its 82 counties and 298 municipalities permits independently — and none publish machine-readable permit records. A person reviews the building department records for the counties you name.'
     }
   ];
 
@@ -422,13 +430,13 @@
 
   function banner(html,kind){ $('banner').innerHTML='<div class="notice '+kind+'">'+html+'</div>'; }
   if(fromRequest){
-    var okMsg = CITYDEF
-      ? '<b>Request received.</b> Below is a live sample built for '+esc(displayCity)+' · '+esc(LABEL[trade]||rawTrade)+', pulled from public permit records a moment ago. Your full brief follows by email Monday morning.'
-      : '<b>Request received.</b> '+esc(displayCity)+' is not on a live feed yet, so a person will build this one for '+esc(LABEL[trade]||rawTrade)+'. Here is what that means and when to expect it.';
+    var okMsg = (CITYDEF && !CITYDEF.manual)
+      ? '<b>Request received.</b> Below is a live sample built for '+esc(displayCity)+' · '+esc(LABEL[trade]||rawTrade)+', pulled from public permit records a moment ago.'
+      : '<b>Request received.</b> '+esc(displayCity)+' has no live permit feed, so a person will build this one for '+esc(LABEL[trade]||rawTrade)+'. Here is what that means and when to expect it.';
     banner('<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div>'+okMsg+'</div>','ok');
   }
 
-  if(fromRequest && !CITYDEF){
+  if(fromRequest && (!CITYDEF || CITYDEF.manual)){
     $('nextsteps').innerHTML='<div class="steps">'
       +'<div><span class="n">01</span><b>A person picks it up</b><span>Someone opens '+esc(displayCity)+'’s building department records directly — no automation covers this city.</span></div>'
       +'<div><span class="n">02</span><b>You get the shortlist</b><span>Open slots for '+esc(LABEL[trade]||rawTrade)+' in '+esc(displayCity)+', with the filing source for each job, usually within two business days.</span></div>'
@@ -487,10 +495,10 @@
 
   $('s-city').textContent = displayCity;
   $('s-trade').textContent = (LABEL[trade]||rawTrade) + (trade==='other' ? ' ('+rawTrade+')' : '');
-  $('h1').innerHTML = CITYDEF
+  $('h1').innerHTML = (CITYDEF && !CITYDEF.manual)
     ? esc(displayCity) + ': every job where <em>your slot is open</em>.'
     : esc(displayCity) + ': <em>request received</em>.';
-  if(trade!=='other') $('dek').textContent = 'Live permit records for '+displayCity+', filtered to jobs where a general contractor is named and '
+  if(trade!=='other' && CITYDEF && !CITYDEF.manual) $('dek').textContent = 'Live permit records for '+displayCity+', filtered to jobs where a general contractor is named and '
      +(trade==='general'?'no general contractor':'no '+tradeLabel.toLowerCase()+' contractor')+' is attached yet.';
   $('s-time').textContent = new Date().toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:'America/New_York'})+' ET';
 
@@ -662,7 +670,7 @@
   }
 
   /* ---------- dispatch ---------- */
-  if(fromRequest && !CITYDEF){
+  if(fromRequest && (!CITYDEF || CITYDEF.manual)){
     $('nextsteps').innerHTML='<div class="steps">'
       +'<div><span class="n">01</span><b>A person picks it up</b><span>Someone opens '+esc(displayCity)+'’s building department records directly — no automation covers this city.</span></div>'
       +'<div><span class="n">02</span><b>You get the shortlist</b><span>Open slots for '+esc(LABEL[trade]||rawTrade)+' in '+esc(displayCity)+', with the filing source for each job, usually within two business days.</span></div>'
@@ -677,7 +685,7 @@
   }
 
   if(tradeUnknown){ unknownTrade(); }
-  else if(!CITYDEF){ unsupported(); }
+  else if(!CITYDEF || CITYDEF.manual){ unsupported(); }
   else {
     loadCity(CITYDEF).then(function(data){
       if(!data.rows.length){
@@ -700,14 +708,20 @@
     $('tbl-title').textContent='No live feed for this metro yet';
     $('s-src').textContent='Manual';
     $('dek').textContent='We only show a live brief where the city publishes machine-readable permit records. We will not pad this page with numbers you cannot check.';
-    var alts=REG.map(function(c){
+    var alts=REG.filter(function(c){return !c.manual;}).map(function(c){
       return '<a href="/live/brief.html?city='+encodeURIComponent(c.name)+'&trade='+encodeURIComponent(rawTrade)+'">'+esc(c.name)+'</a>';
     }).join(' · ');
+    var manualList=REG.filter(function(c){return c.manual;}).map(function(c){
+      return '<a href="/live/brief.html?city='+encodeURIComponent(c.name)+'&trade='+encodeURIComponent(rawTrade)+'">'+esc(c.name)+'</a>';
+    }).join(' · ');
+    var why = (CITYDEF && CITYDEF.manualNote) ? CITYDEF.manualNote : '';
     $('tablearea').innerHTML='<div class="notice warn" style="margin:0"><div>'
-      +'<b>'+esc(displayCity)+' does not publish permits we can read.</b> Many cities release permits only as scanned PDFs, behind a search form, or not at all. '
+      +'<b>'+esc(displayCity)+' does not publish permits we can read.</b> '+(why?esc(why)+' ':'Many cities release permits only as scanned PDFs, behind a search form, or not at all. ')
       +'For '+esc(displayCity)+' we build the brief by hand: a person checks the building department records directly and emails you what they find, usually within two business days. '
       +'You are not charged unless the brief is worth paying for.</div></div>'
-      +'<div class="notice info" style="margin:14px 0 0"><div><b>Live today:</b> '+alts+'. These update daily and the sample you see is current.</div></div>';
+      +'<div class="notice info" style="margin:14px 0 0"><div><b>Live today:</b> '+alts+'. These update daily and the sample you see is current.'
+      +(manualList?' <br><br><b>Built by hand:</b> '+manualList+'. A person assembles these from the building department records, usually within two business days.':'' )
+      +'</div></div>';
     $('method').innerHTML='<b>Why the difference?</b> A live brief needs three things from the city: permit records published as structured data, an issue date, and either contractor roles or separate trade permits. '
       +'Where a city publishes all three, the brief is generated on request. Where it does not, a person does the same work manually. '
       +'<a href="/live/brief.html?city=Austin&trade='+encodeURIComponent(rawTrade)+'">See a live brief with contractor phone numbers</a>.';

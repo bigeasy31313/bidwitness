@@ -675,6 +675,7 @@
   </form>
   <script>
   (function(){
+    var ENDPOINT='https://hook.us2.make.com/n1sj4yq75arj2mt04ytd7ujl55oipdbe';
     var f=document.getElementById('brief-form');
     if(!f) return;
     var sel=f.querySelector('[name=city]');
@@ -687,18 +688,67 @@
     }
     if(sel) sel.addEventListener('change',toggleMetro);
     toggleMetro();
-    f.addEventListener('submit',function(){
-      var sel=f.querySelector('[name=city]');
-      var city=(sel||{}).value||'Chicago';
-      var other=(f.querySelector('[name=metro]')||{}).value||'';
+    function resolveCity(){
+      var city=(sel||{}).value||'';
+      var other=(metroInput||{}).value||'';
       if(/^Other/i.test(city)&&other.trim()) city=other.trim();
-      var trade=(f.querySelector('[name=trade]')||{}).value||'';
-      var next='https://bidwitness.com/live/brief.html'
+      return city||'Chicago';
+    }
+    function briefUrl(city,trade){
+      return 'https://bidwitness.com/live/brief.html'
         +'?city='+encodeURIComponent(city)
         +'&trade='+encodeURIComponent(trade)
         +'&src=request';
-      var n=document.getElementById('bf-next');
-      if(n) n.value=next;
+    }
+    function showSuccess(ticket,city,trade){
+      var card=document.createElement('div');
+      card.setAttribute('role','status');
+      card.style.cssText='background:#101b2d;border:1px solid #2b4166;border-radius:14px;padding:26px 22px 22px;text-align:left;';
+      var kick=document.createElement('div');
+      kick.style.cssText='font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#6f9bff;font-weight:700;';
+      kick.textContent='Request received';
+      var h=document.createElement('p');
+      h.style.cssText='font-size:22px;line-height:1.3;margin:8px 0 10px;font-weight:700;';
+      h.textContent='You are ticket '+ticket+'.';
+      var p=document.createElement('p');
+      p.style.cssText='margin:0 0 18px;color:#c9d4e6;';
+      p.textContent='We will confirm coverage for '+city+' and reply from hello@bidwitness.com, usually the same day. Your first brief is free.';
+      var a=document.createElement('a');
+      a.href=briefUrl(city,trade);
+      a.className='cta';
+      a.style.cssText='display:inline-block;';
+      a.textContent="See this week's sample brief";
+      card.appendChild(kick); card.appendChild(h); card.appendChild(p); card.appendChild(a);
+      if(f.parentNode) f.parentNode.replaceChild(card,f);
+      if(card.scrollIntoView) card.scrollIntoView({block:'center',behavior:'smooth'});
+    }
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var city=resolveCity();
+      var trade=((f.querySelector('[name=trade]')||{}).value||'').trim();
+      var email=((f.querySelector('[name=email]')||{}).value||'').trim();
+      var btn=f.querySelector('button[type=submit]');
+      var label=btn?btn.textContent:'';
+      if(btn){ btn.disabled=true; btn.textContent='Sending\u2026'; }
+      var ctrl=window.AbortController?new AbortController():null;
+      var timer=ctrl?setTimeout(function(){ctrl.abort();},12000):null;
+      var opts={method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email:email,metro:city,trade:trade,source:'bidwitness.com/home'})};
+      if(ctrl) opts.signal=ctrl.signal;
+      fetch(ENDPOINT,opts).then(function(r){
+        if(timer) clearTimeout(timer);
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        return r.json();
+      }).then(function(d){
+        if(!d||!d.ticket) throw new Error('no ticket');
+        showSuccess(d.ticket,city,trade);
+      }).catch(function(){
+        if(timer) clearTimeout(timer);
+        if(btn){ btn.disabled=false; btn.textContent=label; }
+        var n=document.getElementById('bf-next');
+        if(n) n.value=briefUrl(city,trade);
+        f.submit();
+      });
     });
   })();
   </script>

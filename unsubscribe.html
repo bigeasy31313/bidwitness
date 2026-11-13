@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unsubscribe &ndash; BidWitness</title>
+<meta name="description" content="Stop BidWitness briefs from being sent to your address.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://bidwitness.com/unsubscribe.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0b5fff">
+<style>
+  @font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url('/fonts/barlow-condensed-700.woff2') format('woff2');}
+  @font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url('/fonts/inter-var.woff2') format('woff2');}
+  :root{
+    --ink:#0c1116;--mid:#5b6472;--line:#e4e8ee;--wash:#f5f7fa;--accent:#0b5fff;--tint:#eaf1ff;
+    --display:'Barlow Condensed',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#fff;color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.55;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px;}
+  nav{border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;height:64px;}
+  .logo{display:flex;align-items:center;gap:9px;font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);text-decoration:none;}
+  .logo .mark{width:21px;height:21px;border-radius:5px;background:var(--accent);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .logo span{color:var(--accent);}
+  main{padding:64px 0 76px;}
+  h1{font-family:var(--display);font-size:clamp(38px,5vw,56px);font-weight:700;line-height:1;letter-spacing:-.005em;margin-bottom:16px;}
+  .dek{font-size:17px;color:var(--mid);max-width:520px;margin-bottom:28px;line-height:1.6;}
+  .addr{
+    display:inline-block;font-family:var(--body);font-size:15px;font-weight:600;color:var(--ink);
+    background:var(--wash);border:1px solid var(--line);border-radius:8px;padding:11px 14px;margin-bottom:26px;
+    word-break:break-all;
+  }
+  .btn{
+    display:inline-block;border:0;cursor:pointer;background:var(--ink);color:#fff;font-family:var(--body);
+    font-size:15px;font-weight:600;padding:14px 24px;border-radius:8px;
+  }
+  .btn:hover{background:#000;}
+  .btn[disabled]{opacity:.55;cursor:default;}
+  .note{font-size:13px;color:var(--mid);margin-top:22px;line-height:1.65;max-width:520px;}
+  .note a{color:var(--accent);font-weight:600;text-decoration:none;}
+  .note a:hover{text-decoration:underline;}
+  .done{display:none;}
+  .done .tick{
+    width:46px;height:46px;border-radius:50%;background:var(--tint);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;margin-bottom:24px;
+  }
+  footer{border-top:1px solid #1d242c;background:var(--ink);padding:26px 0;font-size:12px;color:#68737f;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  footer a{color:#8b96a4;text-decoration:none;}
+  footer a:hover{color:#fff;}
+  .fl{display:flex;gap:16px;flex-wrap:wrap;}
+  @media(max-width:600px){main{padding:44px 0 56px;}h1{font-size:38px;}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="logo" href="/"><span class="mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 10.5V1.5h4.2c1.5 0 2.4.8 2.4 2 0 .9-.5 1.6-1.2 1.9 1 .2 1.7 1 1.7 2.2 0 1.7-1.2 2.9-3 2.9H1Z" fill="#fff"/></svg></span>Bid<span>Witness</span></a>
+</div></nav>
+
+<main><div class="wrap">
+
+  <div id="ask">
+    <h1>Unsubscribe.</h1>
+    <p class="dek">One click removes this address from the Monday brief. No questions, no retention offer.</p>
+    <div class="addr" id="addr">&nbsp;</div>
+    <div><button class="btn" id="go" type="button">Stop sending me briefs</button></div>
+    <p class="note" id="note">
+      Changed your mind? You can request a brief again any Monday from the <a href="/">homepage</a>.
+      If the button does nothing, email <a href="mailto:hello@bidwitness.com">hello@bidwitness.com</a> and you will be removed by hand the same day.
+    </p>
+  </div>
+
+  <div id="done" class="done">
+    <div class="tick" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <h1>You are off the list.</h1>
+    <p class="dek" id="donedek">No further briefs will be sent to this address. Anything already in your inbox is the last of it.</p>
+  </div>
+
+</div></main>
+
+<footer><div class="wrap">
+  <div>BidWitness &mdash; permit intelligence for specialty contractors.<br>Operated by Theta Work Labs LLC.</div>
+  <div class="fl">
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/refunds">Refunds</a>
+    <a href="/cookies">Cookies</a>
+    <a href="mailto:hello@bidwitness.com">Contact</a>
+  </div>
+</div></footer>
+
+<script>
+(function(){
+  var HOOK='https://bidwitness.app.n8n.cloud/webhook/bidwitness-unsubscribe';
+  var ask=document.getElementById('ask');
+  var done=document.getElementById('done');
+  var addr=document.getElementById('addr');
+  var go=document.getElementById('go');
+  var note=document.getElementById('note');
+  var donedek=document.getElementById('donedek');
+
+  var qs=new URLSearchParams(location.search);
+  var email=(qs.get('e')||qs.get('email')||'').trim().toLowerCase();
+
+  function show(target,detail){
+    ask.style.display='none';
+    done.style.display='block';
+    if(detail) donedek.textContent=detail;
+    window.scrollTo(0,0);
+  }
+
+  if(!email || email.indexOf('@')<1){
+    addr.style.display='none';
+    go.style.display='none';
+    note.innerHTML='This link is missing the address it should remove. Email <a href="mailto:hello@bidwitness.com">hello@bidwitness.com</a> from the address that is receiving briefs and it will be removed by hand the same day.';
+    return;
+  }
+
+  addr.textContent=email;
+
+  go.addEventListener('click',function(){
+    go.disabled=true;
+    go.textContent='Removing\u2026';
+    // Fire-and-forget: the endpoint returns no readable body cross-origin,
+    // so the confirmation below is shown as soon as the request is sent.
+    try{
+      fetch(HOOK+'?e='+encodeURIComponent(email),{mode:'no-cors',cache:'no-store'});
+    }catch(err){}
+    setTimeout(function(){ show('done','No further briefs will be sent to '+email+'. Anything already in your inbox is the last of it.'); },600);
+  });
+})();
+</script>
+</body></html>

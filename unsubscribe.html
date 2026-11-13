@@ -78,17 +78,17 @@
   </div>
 
   <div id="done" class="done">
-    <div class="tick" aria-hidden="true">
+    <div class="tick" id="tick" aria-hidden="true">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
     </div>
-    <h1>You are off the list.</h1>
+    <h1 id="doneh1">You are off the list.</h1>
     <p class="dek" id="donedek">No further briefs will be sent to this address. Anything already in your inbox is the last of it.</p>
   </div>
 
 </div></main>
 
 <footer><div class="wrap">
-  <div>BidWitness &mdash; permit intelligence for specialty contractors.<br>Operated by Theta Work Labs LLC.</div>
+  <div>BidWitness &mdash; permit intelligence for specialty contractors.<br>Operated by Theta Work Labs LLC, 901 N State St. Ste. N, Jackson, MS 39202.</div>
   <div class="fl">
     <a href="/privacy">Privacy</a>
     <a href="/terms">Terms</a>
@@ -127,15 +127,33 @@
 
   addr.textContent=email;
 
+  var tick=document.getElementById('tick');
+  var doneh1=document.getElementById('doneh1');
+  var settled=false;
+
+  function ok(){
+    if(settled) return; settled=true;
+    doneh1.textContent='You are off the list.';
+    show('done','No further briefs will be sent to '+email+'. Anything already in your inbox is the last of it.');
+  }
+
+  function bad(){
+    if(settled) return; settled=true;
+    if(tick) tick.style.display='none';
+    doneh1.textContent='We could not confirm that.';
+    show('done','The removal request did not reach our system, so this address may still receive briefs. Email hello@bidwitness.com from '+email+' and it will be removed by hand today.');
+  }
+
   go.addEventListener('click',function(){
     go.disabled=true;
     go.textContent='Removing\u2026';
-    // Fire-and-forget: the endpoint returns no readable body cross-origin,
-    // so the confirmation below is shown as soon as the request is sent.
-    try{
-      fetch(HOOK+'?e='+encodeURIComponent(email),{mode:'no-cors',cache:'no-store'});
-    }catch(err){}
-    setTimeout(function(){ show('done','No further briefs will be sent to '+email+'. Anything already in your inbox is the last of it.'); },600);
+    // The workflow answers with {ok:true,matched:0|1} once the record is updated,
+    // so the page reports what actually happened instead of guessing.
+    var timer=setTimeout(bad,12000);
+    fetch(HOOK+'?e='+encodeURIComponent(email),{cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error('status '+r.status); return r.json(); })
+      .then(function(j){ clearTimeout(timer); (j&&j.ok)?ok():bad(); })
+      .catch(function(){ clearTimeout(timer); bad(); });
   });
 })();
 </script>

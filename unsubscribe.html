@@ -110,6 +110,7 @@
 
   var qs=new URLSearchParams(location.search);
   var email=(qs.get('e')||qs.get('email')||'').trim().toLowerCase();
+  var token=(qs.get('t')||'').trim().toLowerCase();
 
   function show(target,detail){
     ask.style.display='none';
@@ -131,6 +132,13 @@
   var doneh1=document.getElementById('doneh1');
   var settled=false;
 
+  function invalid(){
+    if(settled) return; settled=true;
+    if(tick) tick.style.display='none';
+    doneh1.textContent='This link is not valid.';
+    show('done','The link you followed is missing or has an incorrect signature, so nothing was changed. Email hello@bidwitness.com from '+email+' and that address will be removed by hand today.');
+  }
+
   function ok(){
     if(settled) return; settled=true;
     doneh1.textContent='You are off the list.';
@@ -150,9 +158,15 @@
     // The workflow answers with {ok:true,matched:0|1} once the record is updated,
     // so the page reports what actually happened instead of guessing.
     var timer=setTimeout(bad,12000);
-    fetch(HOOK+'?e='+encodeURIComponent(email),{cache:'no-store'})
+    var url=HOOK+'?e='+encodeURIComponent(email)+(token?'&t='+encodeURIComponent(token):'');
+    fetch(url,{cache:'no-store'})
       .then(function(r){ if(!r.ok) throw new Error('status '+r.status); return r.json(); })
-      .then(function(j){ clearTimeout(timer); (j&&j.ok)?ok():bad(); })
+      .then(function(j){
+        clearTimeout(timer);
+        if(j&&j.ok) return ok();
+        if(j&&j.reason==='bad_token') return invalid();
+        return bad();
+      })
       .catch(function(){ clearTimeout(timer); bad(); });
   });
 })();

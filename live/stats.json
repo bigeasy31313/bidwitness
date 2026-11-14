@@ -1,0 +1,10 @@
+{
+  "city": "Chicago",
+  "trade": "roofing",
+  "days": 30,
+  "jobs": 571,
+  "value": 281323577,
+  "updated_at": "2026-11-14T01:51:31Z",
+  "source": "City of Chicago open data",
+  "how": "Jobs in the last 30 days that have a permit and a general contractor named, but no roofing contractor attached."
+}

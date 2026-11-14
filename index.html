@@ -478,15 +478,15 @@
           <span class="slot open">HVAC</span>
           <span class="slot open">Plumbing</span>
         </div>
-        <div class="foot"><span>Your brief, Monday 6am</span><b>78 jobs</b></div>
+        <div class="foot"><span>Your brief, Monday 6am</span><b id="hero-jobs">571 jobs</b></div>
       </div>
     </div>
   </div>
 </div>
 
 <div class="wrap"><div class="proof">
-  <div><b id="stat-jobs">78</b><i>Open jobs, one city, 30 days</i></div>
-  <div><b id="stat-value">$246M</b><i>Permitted work in that list</i></div>
+  <div><b id="stat-jobs">571</b><i>Open jobs, one city, 30 days</i></div>
+  <div><b id="stat-value">$281M</b><i>Permitted work in that list</i></div>
   <div><b>7</b><i>Metros live today</i></div>
   <div><b>0</b><i>Ad spend required</i></div>
 </div></div>
@@ -756,6 +756,43 @@
     },{rootMargin:'0px 0px -8% 0px',threshold:.05});
     document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
   })();
+</script>
+
+
+<script>
+/* The numbers in the hero and the stat strip come from live/stats.json, which is
+   rebuilt from the same permit engine that writes the brief. If the file is missing,
+   unreadable, or more than ten days old, the figures are replaced with a dash rather
+   than left showing a number nobody can stand behind. */
+(function () {
+  var hero = document.getElementById('hero-jobs');
+  var jobsEl = document.getElementById('stat-jobs');
+  var valEl = document.getElementById('stat-value');
+  function flex(n) {
+    if (!isFinite(n) || n <= 0) return '\u2014';
+    if (n >= 1e9) return '$' + (Math.round(n / 1e8) / 10) + 'B';
+    if (n >= 1e6) return '$' + Math.round(n / 1e6) + 'M';
+    if (n >= 1e3) return '$' + Math.round(n / 1e3) + 'K';
+    return '$' + Math.round(n);
+  }
+  function blank() {
+    if (hero) hero.textContent = '\u2014 jobs';
+    if (jobsEl) jobsEl.textContent = '\u2014';
+    if (valEl) valEl.textContent = '\u2014';
+  }
+  fetch('/live/stats.json', { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error('no stats'); return r.json(); })
+    .then(function (d) {
+      var at = Date.parse(d.updated_at || '');
+      var days = (Date.now() - at) / 86400000;
+      if (!d.jobs || !isFinite(d.jobs) || !isFinite(days) || days > 10) return blank();
+      var n = Number(d.jobs).toLocaleString('en-US');
+      if (hero) hero.textContent = n + ' jobs';
+      if (jobsEl) jobsEl.textContent = n;
+      if (valEl) valEl.textContent = flex(Number(d.value));
+    })
+    .catch(blank);
+})();
 </script>
 
 </body>

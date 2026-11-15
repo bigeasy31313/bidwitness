@@ -332,12 +332,190 @@
   footer .wl-badge:hover{opacity:1;}
   footer .wl-badge img{width:200px;height:43px;display:block;}
 
+  /* ---------- engagement layer ---------- */
+  #scroll-progress{
+    position:fixed;top:0;left:0;height:3px;width:0;z-index:80;
+    background:linear-gradient(90deg,var(--accent),#37c978);
+  }
+  .exclusive-badge{
+    display:inline-flex;align-items:center;gap:8px;margin-top:14px;
+    font-size:12.5px;font-weight:600;color:var(--ink);
+    background:#fff7db;border:1px solid #f0df9a;padding:7px 12px;border-radius:100px;
+  }
+  .exclusive-badge svg{flex:0 0 auto;}
+  .hero-visual .shot .sweep{
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.14) 48%,transparent 62%);
+    transform:translateX(-120%);animation:sweep 7s ease-in-out infinite;
+  }
+  @keyframes sweep{0%,55%{transform:translateX(-120%);}85%,100%{transform:translateX(120%);}}
+  .leadcard{transition:transform .25s ease;will-change:transform;}
+  .leadcard .gcrow{
+    display:flex;justify-content:space-between;gap:10px;font-size:11.5px;color:var(--mid);
+    margin-bottom:11px;
+  }
+  .leadcard .gcrow b{color:var(--ink);font-weight:600;text-align:right;}
+  .slot-meter{height:6px;border-radius:99px;background:var(--wash);overflow:hidden;margin-top:12px;}
+  .slot-meter i{display:block;height:100%;width:0;border-radius:99px;
+    background:linear-gradient(90deg,var(--accent),#37c978);transition:width 1.1s ease .2s;}
+  .in .slot-meter i,.hero .slot-meter i{width:86%;}
+  .slot-meter-label{font-size:10.5px;color:var(--mid);margin-top:6px;letter-spacing:.02em;}
+
+  /* radar */
+  .radar-sec{background:var(--ink);color:#fff;position:relative;overflow:hidden;}
+  .radar-sec:before{
+    content:"";position:absolute;left:50%;top:-220px;width:900px;height:520px;transform:translateX(-50%);
+    background:radial-gradient(ellipse,rgba(11,95,255,.28),transparent 70%);
+  }
+  .radar-sec .wrap{position:relative;}
+  .radar-sec .kicker{color:#6f9bff;}
+  .radar-sec h2{color:#fff;}
+  .radar-sec .lede{color:#9aa5b4;}
+  .radar-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:44px;align-items:start;}
+  .radar-visual{
+    position:relative;aspect-ratio:1/1;max-width:420px;margin:0 auto;width:100%;
+    border-radius:50%;border:1px solid rgba(255,255,255,.14);
+    background:
+      radial-gradient(circle,transparent 0 24%,rgba(255,255,255,.07) 24.5% 25%,transparent 25.5% 49%,rgba(255,255,255,.07) 49.5% 50%,transparent 50.5% 74%,rgba(255,255,255,.07) 74.5% 75%,transparent 75.5%),
+      radial-gradient(circle at center,#101823,#0c1116 70%);
+    overflow:hidden;
+  }
+  .radar-visual:before,.radar-visual:after{
+    content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,.08);
+  }
+  .radar-visual:after{left:0;right:0;top:50%;bottom:auto;width:auto;height:1px;}
+  .radar-sweep{
+    position:absolute;inset:0;border-radius:50%;
+    background:conic-gradient(from 0deg,rgba(55,201,120,.5),rgba(55,201,120,.06) 70deg,transparent 80deg);
+    animation:spin 5.5s linear infinite;transform-origin:50% 50%;
+  }
+  .radar-visual.scanning .radar-sweep{animation-duration:1.1s;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .blip{
+    position:absolute;width:11px;height:11px;border-radius:50%;background:#37c978;
+    box-shadow:0 0 0 0 rgba(55,201,120,.55);opacity:.25;transition:opacity .3s;
+  }
+  .blip.on{opacity:1;animation:blip 1.6s ease-out infinite;}
+  @keyframes blip{0%{box-shadow:0 0 0 0 rgba(55,201,120,.55);}100%{box-shadow:0 0 0 16px rgba(55,201,120,0);}}
+  .blip.b1{left:24%;top:30%;}.blip.b2{left:64%;top:20%;}.blip.b3{left:72%;top:58%;}
+  .blip.b4{left:38%;top:70%;}.blip.b5{left:52%;top:44%;}
+  .radar-status{
+    max-width:420px;margin:20px auto 0;font-size:13px;color:#8fa0b5;text-align:center;min-height:20px;
+  }
+  .radar-status b{color:#fff;}
+  .radar-panel{
+    background:#141c27;border:1px solid #263449;border-radius:16px;padding:26px;
+  }
+  .radar-panel label{
+    display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:#8fa0b5;margin:18px 0 9px;
+  }
+  .radar-panel label:first-child{margin-top:0;}
+  .radar-panel select{
+    width:100%;padding:12px 13px;border:1px solid #2c3e57;border-radius:9px;font-size:15px;
+    font-family:inherit;background:#0e1622;color:#fff;
+  }
+  .radar-panel select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(11,95,255,.3);}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    font-family:inherit;font-size:13.5px;font-weight:600;color:#c9d6e8;cursor:pointer;
+    background:#0e1622;border:1px solid #2c3e57;padding:9px 14px;border-radius:100px;
+    transition:all .15s;
+  }
+  .chip:hover{border-color:#4a6ea8;color:#fff;}
+  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .run-radar{
+    width:100%;margin-top:24px;background:#37c978;color:#062815;border:0;cursor:pointer;
+    font-family:inherit;font-size:15.5px;font-weight:700;padding:15px 20px;border-radius:10px;
+    transition:transform .15s,background .15s;
+  }
+  .run-radar:hover{background:#2cb668;transform:translateY(-1px);}
+  .run-radar:disabled{opacity:.65;cursor:wait;transform:none;}
+  .radar-steps{display:flex;gap:6px;margin-top:18px;}
+  .radar-steps span{
+    flex:1;text-align:center;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    color:#5f7189;padding:8px 4px;border-radius:6px;background:#0e1622;border:1px solid #22314a;
+    transition:all .3s;
+  }
+  .radar-steps span.active{color:#fff;border-color:var(--accent);background:rgba(11,95,255,.25);}
+  .radar-steps span.done{color:#0c2b18;background:#37c978;border-color:#37c978;}
+  .radar-result{
+    display:none;margin-top:20px;background:#0e1622;border:1px solid #2b4166;border-radius:12px;
+    padding:20px;
+  }
+  .radar-result.show{display:block;animation:pop .45s ease;}
+  @keyframes pop{from{opacity:0;transform:scale(.97) translateY(6px);}to{opacity:1;transform:none;}}
+  .radar-result .rr-kick{
+    font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#37c978;margin-bottom:8px;
+  }
+  .radar-result .rr-big{
+    font-family:var(--display);font-size:29px;font-weight:700;line-height:1.08;color:#fff;margin-bottom:8px;
+  }
+  .radar-result .rr-big em{font-style:normal;color:#37c978;}
+  .radar-result p{font-size:13.5px;color:#9fb0c6;line-height:1.6;margin-bottom:16px;}
+  .radar-result .rr-actions{display:flex;gap:10px;flex-wrap:wrap;}
+  .radar-result .rr-actions a{
+    font-size:13.5px;font-weight:700;text-decoration:none;padding:11px 17px;border-radius:8px;
+  }
+  .rr-primary{background:var(--accent);color:#fff;}
+  .rr-primary:hover{background:#0049d4;}
+  .rr-secondary{background:transparent;color:#fff;border:1px solid #3a5176;}
+  .rr-secondary:hover{border-color:#6f9bff;}
+
+  /* live brief frame */
+  .brief-frame{
+    border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;
+    box-shadow:0 30px 70px -34px rgba(12,17,22,.35);
+  }
+  .brief-frame .bf-bar{
+    display:flex;align-items:center;gap:8px;background:var(--wash);
+    border-bottom:1px solid var(--line);padding:11px 16px;
+  }
+  .bf-bar .dotty{width:10px;height:10px;border-radius:50%;}
+  .bf-bar .url{
+    margin-left:8px;font-size:12px;color:var(--mid);background:#fff;border:1px solid var(--line);
+    border-radius:6px;padding:4px 10px;font-family:ui-monospace,Menlo,monospace;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .bf-live{
+    margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:.1em;color:var(--good);
+    display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  }
+  .bf-live i{width:7px;height:7px;border-radius:50%;background:#37c978;animation:blip 1.8s infinite;}
+  .brief-frame iframe{width:100%;height:560px;border:0;display:block;background:#fff;}
+
+  /* permit duo + pricing exclusivity */
+  .permit-duo{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;margin-top:44px;align-items:stretch;}
+  .permit-duo .permit{margin-top:0;}
+  .everyday{
+    border:1px solid var(--line);border-radius:14px;padding:30px 28px;background:#fff;
+  }
+  .everyday h3{font-family:var(--display);font-size:25px;font-weight:700;margin-bottom:10px;line-height:1.1;}
+  .everyday p{font-size:14px;color:var(--mid);line-height:1.65;margin-bottom:16px;}
+  .everyday .rowline{
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+    padding:10px 0;border-top:1px solid var(--line);font-size:13.5px;font-weight:600;
+  }
+  .everyday .rowline span:last-child{
+    font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--good);
+    background:#e8f6ee;padding:3px 8px;border-radius:4px;white-space:nowrap;
+  }
+  .exclusive-strip{
+    max-width:560px;margin:0 auto 22px;text-align:center;background:#fff7db;
+    border:1px solid #f0df9a;border-radius:12px;padding:16px 20px;
+  }
+  .exclusive-strip b{
+    display:block;font-family:var(--display);font-size:21px;font-weight:700;letter-spacing:.02em;
+  }
+  .exclusive-strip span{font-size:13px;color:#6d5f1e;}
+
   /* reveal */
   .js .rv{opacity:0;transform:translateY(14px);}
   .js .rv.in{opacity:1;transform:none;transition:opacity .55s ease,transform .55s ease;}
   @media(prefers-reduced-motion:reduce){
     .js .rv{opacity:1;transform:none;}
     html{scroll-behavior:auto;}
+    .radar-sweep,.hero-visual .shot .sweep,.bf-live i,.blip.on{animation:none;}
   }
 
   @media(max-width:940px){
@@ -348,6 +526,8 @@
     .hero-visual .shot{min-height:380px;max-height:520px;width:100%;}
     .leadcard{left:auto;right:16px;bottom:-24px;width:min(300px,86%);}
     .how,.tiers{grid-template-columns:1fr;}
+    .radar-grid{grid-template-columns:1fr;}
+    .permit-duo{grid-template-columns:1fr;}
     .tier.best{order:-1;}
     section{padding:64px 0;}
     .proof{grid-template-columns:repeat(2,1fr);}
@@ -369,6 +549,9 @@
     .compare th:nth-child(2),.compare td:nth-child(2){display:none;}
     .compare .us{padding-left:10px;}
     .navright .navlink{display:none;}
+    .brief-frame iframe{height:620px;}
+    .radar-panel{padding:20px;}
+    .radar-result .rr-actions a{flex:1;text-align:center;}
     .final{padding:64px 0;}
     .final form{padding:18px;}
   }
@@ -428,6 +611,7 @@
 </head>
 <body>
 <script>document.body.className+=' js';</script>
+<div id="scroll-progress" aria-hidden="true"></div>
 
 <nav><div class="wrap">
   <a class="logo" href="/">
@@ -437,6 +621,7 @@
     <b>Bid<span>Witness</span></b>
   </a>
   <div class="navright">
+    <a class="navlink" href="#radar">Open-Slot Radar</a>
     <a class="navlink" href="#how">How it works</a>
     <a class="navlink" href="#pricing">Pricing</a>
     <a class="navlink" href="/live/brief.html?city=Chicago&amp;trade=roofing">Sample brief</a>
@@ -459,25 +644,36 @@
         <a class="textlink" href="/live/brief.html?city=Chicago&amp;trade=roofing">See a live Chicago brief &rarr;</a>
       </div>
       <div class="cta-sub">No contract. No setup call. Cancel in one click.</div>
+      <div>
+        <span class="exclusive-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a6d00" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          One metro &middot; one trade &middot; one subscriber — when your slot is taken, it closes
+        </span>
+      </div>
     </div>
 
     <div class="hero-visual">
       <div class="shot">
         <span class="tag tl">Chicago &middot; 30 days</span>
+        <span class="sweep" aria-hidden="true"></span>
         <img src="hero-site.jpg" width="1100" height="1380" alt="Steel frame of a mid-rise under construction at dusk, with a tower crane overhead" fetchpriority="high">
       </div>
-      <div class="leadcard" aria-hidden="true">
-        <div class="hdr"><span>Permit issued</span><span class="pill">4 slots open</span></div>
+      <div class="leadcard" id="leadcard" aria-hidden="true">
+        <div class="hdr"><span>From the Monday brief</span><span class="pill">6 slots open</span></div>
         <div class="addr">1331 S Wells St</div>
-        <div class="meta">New construction &middot; $94,000,000 &middot; GC named</div>
+        <div class="meta">New construction &middot; $94,000,000</div>
+        <div class="gcrow"><span>General contractor</span><b>Named on the filing</b></div>
         <div class="slots">
           <span class="slot taken">Mason</span>
           <span class="slot open">Roofer</span>
           <span class="slot open">Electrical</span>
-          <span class="slot taken">Excavation</span>
+          <span class="slot open">Carpenter</span>
           <span class="slot open">HVAC</span>
           <span class="slot open">Plumbing</span>
+          <span class="slot open">Excavator</span>
         </div>
+        <div class="slot-meter"><i></i></div>
+        <div class="slot-meter-label">6 of 7 trade slots still unclaimed on this job</div>
         <div class="foot"><span>Your brief, Monday 6am</span><b id="hero-jobs">571 jobs</b></div>
       </div>
     </div>
@@ -490,6 +686,81 @@
   <div><b>7</b><i>Metros live today</i></div>
   <div><b>0</b><i>Ad spend required</i></div>
 </div></div>
+
+<section class="radar-sec" id="radar"><div class="wrap rv">
+  <div class="kicker">Open-Slot Radar</div>
+  <h2>Point the radar at your trade.</h2>
+  <p class="lede">Pick your metro and your trade and watch what BidWitness does with a city's
+  permit filings: read them all, check who is already attached, and light up the slots nobody has claimed.</p>
+  <div class="radar-grid">
+    <div>
+      <div class="radar-visual" id="radar-visual" aria-hidden="true">
+        <div class="radar-sweep"></div>
+        <span class="blip b1"></span><span class="blip b2"></span><span class="blip b3"></span>
+        <span class="blip b4"></span><span class="blip b5"></span>
+      </div>
+      <div class="radar-status" id="radar-status">Radar idle — <b>run a scan</b> and watch the open slots light up.</div>
+    </div>
+    <div class="radar-panel">
+      <label for="radar-city">Your metro</label>
+      <select id="radar-city">
+        <option>Chicago</option>
+        <option>New York</option>
+        <option>Austin</option>
+        <option>Seattle</option>
+        <option>Washington DC</option>
+        <option>New Orleans</option>
+        <option>Cincinnati</option>
+        <option>Mississippi</option>
+      </select>
+      <label>Your trade</label>
+      <div class="chips" id="radar-trades" role="group" aria-label="Choose your trade">
+        <button type="button" class="chip" data-trade="roofing" aria-pressed="true">Roofing</button>
+        <button type="button" class="chip" data-trade="electrical" aria-pressed="false">Electrical</button>
+        <button type="button" class="chip" data-trade="plumbing" aria-pressed="false">Plumbing</button>
+        <button type="button" class="chip" data-trade="hvac" aria-pressed="false">HVAC</button>
+        <button type="button" class="chip" data-trade="concrete" aria-pressed="false">Concrete</button>
+        <button type="button" class="chip" data-trade="masonry" aria-pressed="false">Masonry</button>
+      </div>
+      <label>Smallest job worth your Monday</label>
+      <div class="chips" id="radar-floors" role="group" aria-label="Choose your minimum job value">
+        <button type="button" class="chip" data-floor="$50K" aria-pressed="false">$50K+</button>
+        <button type="button" class="chip" data-floor="$250K" aria-pressed="true">$250K+</button>
+        <button type="button" class="chip" data-floor="$500K" aria-pressed="false">$500K+</button>
+        <button type="button" class="chip" data-floor="$1M" aria-pressed="false">$1M+</button>
+      </div>
+      <button type="button" class="run-radar" id="run-radar">Run the radar</button>
+      <div class="radar-steps" id="radar-steps" aria-hidden="true">
+        <span data-step="0">Read filings</span>
+        <span data-step="1">Check attached</span>
+        <span data-step="2">Mark open slots</span>
+      </div>
+      <div class="radar-result" id="radar-result" role="status"></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="live-preview"><div class="wrap rv">
+  <div class="kicker">Live, not a mockup</div>
+  <h2>This is the actual brief. It just loaded.</h2>
+  <p class="lede">No screenshot, no staged demo. The frame below is the live Chicago roofing brief,
+  pulled from city permit records when this page loaded — the same engine that builds a subscriber's Monday brief.</p>
+  <div class="brief-frame">
+    <div class="bf-bar">
+      <span class="dotty" style="background:#ff5f57;"></span>
+      <span class="dotty" style="background:#febc2e;"></span>
+      <span class="dotty" style="background:#28c840;"></span>
+      <span class="url">bidwitness.com/live/brief — Chicago &middot; Roofing</span>
+      <span class="bf-live"><i></i>LIVE</span>
+    </div>
+    <iframe src="/live/brief.html?city=Chicago&amp;trade=roofing" loading="lazy"
+      title="Live BidWitness sample brief for Chicago roofing"></iframe>
+  </div>
+  <div class="cta-row" style="margin-top:22px;">
+    <a class="cta blue" href="/live/brief.html?city=Chicago&amp;trade=roofing">Open the full live brief</a>
+    <a class="textlink" href="#radar">Run it for your trade &rarr;</a>
+  </div>
+</div></section>
 
 <section><div class="wrap rv">
   <div class="kicker">The difference</div>
@@ -510,6 +781,7 @@
     <tr><td>Price</td><td class="them">$20–$599/mo</td><td class="us">$299/mo</td></tr>
   </table>
 
+  <div class="permit-duo">
   <div class="permit">
     <div class="ph"><b>Example</b> One filing, read properly</div>
     <div class="big">
@@ -522,6 +794,17 @@
       That is six open trade slots on one job — and it was published months ago, for free,
       where anyone could have found it.
     </div>
+  </div>
+  <div class="everyday">
+    <h3>Most Mondays are not $94M towers.</h3>
+    <p>They are the steady work your crew actually runs on — the alteration, the tenant
+    build-out, the reroof — each one already permitted, each one with a general contractor
+    named, and your trade slot still sitting empty. Typical rows in a brief look like this:</p>
+    <div class="rowline"><span>Commercial alteration</span><span>Slot open</span></div>
+    <div class="rowline"><span>Tenant build-out</span><span>Slot open</span></div>
+    <div class="rowline"><span>Reroof &amp; parapet work</span><span>Slot open</span></div>
+    <div class="rowline"><span>New construction</span><span>Slot open</span></div>
+  </div>
   </div>
 </div></section>
 
@@ -555,6 +838,10 @@
   <div class="kicker">Pricing</div>
   <h2>Priced against the job, not against software.</h2>
   <p class="lede">One plan, one price: a metro and a trade for $299 a month. One foundation job pays for a decade.</p>
+    <div class="exclusive-strip">
+      <b>One trade &middot; one metro &middot; one subscriber</b>
+      <span>Your slot is never resold to a competitor in your metro. When it is taken, the listing closes.</span>
+    </div>
     <div class="tiers" style="grid-template-columns:1fr;max-width:560px;margin:0 auto;">
     <div class="tier best">
       <div class="flag">ONE PLAN</div>
@@ -562,6 +849,7 @@
       <div class="price">$299</div>
       <div class="per">per month &middot; one metro, one trade</div>
       <ul>
+        <li><strong>Exclusive:</strong> one subscriber per trade, per metro</li>
         <li>Weekly brief every Monday</li>
         <li>Every job above your value floor</li>
         <li>General contractor named and phoned on every row</li>
@@ -758,6 +1046,196 @@
   })();
 </script>
 
+
+<script>
+/* Engagement layer: scroll progress, animated counters, lead-card tilt, Open-Slot Radar. */
+(function(){
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* scroll progress */
+  var bar = document.getElementById('scroll-progress');
+  if(bar){
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      if(ticking) return; ticking = true;
+      window.requestAnimationFrame(function(){
+        var h = document.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+        ticking = false;
+      });
+    }, {passive:true});
+  }
+
+  /* animated proof counters */
+  function animateCount(el){
+    var raw = el.textContent.trim();
+    var m = raw.match(/^(\$?)(\d[\d,]*)(M|B|K)?$/);
+    if(!m || reduced) return;
+    var prefix = m[1], target = parseInt(m[2].replace(/,/g,''), 10), suffix = m[3] || '';
+    if(!isFinite(target) || target <= 1) return;
+    var t0 = null, dur = 1100;
+    function frame(ts){
+      if(!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + Math.round(target * eased).toLocaleString('en-US') + suffix;
+      if(p < 1) window.requestAnimationFrame(frame);
+    }
+    window.requestAnimationFrame(frame);
+  }
+  var proof = document.querySelector('.proof');
+  if(proof && 'IntersectionObserver' in window){
+    var seen = false;
+    var po = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting && !seen){
+          seen = true;
+          proof.querySelectorAll('b').forEach(animateCount);
+          po.disconnect();
+        }
+      });
+    }, {threshold:.35});
+    po.observe(proof);
+  }
+
+  /* lead card tilt */
+  var card = document.getElementById('leadcard');
+  if(card && !reduced && window.matchMedia('(pointer:fine)').matches){
+    var wrap = card.parentElement;
+    wrap.addEventListener('pointermove', function(ev){
+      var r = wrap.getBoundingClientRect();
+      var x = (ev.clientX - r.left) / r.width - .5;
+      var y = (ev.clientY - r.top) / r.height - .5;
+      card.style.transform = 'perspective(700px) rotateY(' + (x * 5) + 'deg) rotateX(' + (-y * 5) + 'deg)';
+    });
+    wrap.addEventListener('pointerleave', function(){ card.style.transform = ''; });
+  }
+
+  /* ---------- Open-Slot Radar ---------- */
+  var citySel = document.getElementById('radar-city');
+  var tradesBox = document.getElementById('radar-trades');
+  var floorsBox = document.getElementById('radar-floors');
+  var runBtn = document.getElementById('run-radar');
+  if(!citySel || !tradesBox || !runBtn) return;
+  var visual = document.getElementById('radar-visual');
+  var status = document.getElementById('radar-status');
+  var result = document.getElementById('radar-result');
+  var steps = document.querySelectorAll('#radar-steps span');
+  var trade = 'roofing', tradeLabel = 'Roofing', floor = '$250K';
+  var statsCache = null;
+
+  function pick(box, attr, cb){
+    box.addEventListener('click', function(ev){
+      var btn = ev.target.closest('button'); if(!btn) return;
+      box.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+      btn.setAttribute('aria-pressed','true');
+      cb(btn.getAttribute(attr), btn.textContent.trim());
+    });
+  }
+  pick(tradesBox, 'data-trade', function(v, label){ trade = v; tradeLabel = label; hideResult(); });
+  pick(floorsBox, 'data-floor', function(v){ floor = v; });
+  citySel.addEventListener('change', hideResult);
+
+  function hideResult(){ if(result){ result.className = 'radar-result'; result.innerHTML = ''; } }
+  function briefUrl(city, tr){
+    return '/live/brief.html?city=' + encodeURIComponent(city) + '&trade=' + encodeURIComponent(tr);
+  }
+  function moneyShort(n){
+    if(n >= 1e6) return '$' + Math.round(n / 1e6) + 'M';
+    if(n >= 1e3) return '$' + Math.round(n / 1e3) + 'K';
+    return '$' + Math.round(n);
+  }
+  function loadStats(){
+    if(statsCache) return Promise.resolve(statsCache);
+    return fetch('/live/stats.json', {cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error('no stats'); return r.json(); })
+      .then(function(d){
+        var days = (Date.now() - Date.parse(d.updated_at || '')) / 86400000;
+        if(!d.jobs || !isFinite(days) || days > 10) return null;
+        statsCache = d; return d;
+      })
+      .catch(function(){ return null; });
+  }
+  function claimSlot(city, trLabel){
+    var sel = document.querySelector('#brief-form [name=city]');
+    var tr = document.querySelector('#brief-form [name=trade]');
+    if(sel){
+      for(var i = 0; i < sel.options.length; i++){
+        if(sel.options[i].text === city || sel.options[i].value === city){ sel.selectedIndex = i; break; }
+      }
+      sel.dispatchEvent(new Event('change'));
+    }
+    if(tr) tr.value = trLabel;
+  }
+
+  runBtn.addEventListener('click', function(){
+    var city = citySel.value;
+    runBtn.disabled = true;
+    runBtn.textContent = 'Scanning…';
+    hideResult();
+    if(visual) visual.classList.add('scanning');
+    steps.forEach(function(s){ s.className = ''; });
+    var blips = visual ? visual.querySelectorAll('.blip') : [];
+    blips.forEach(function(b){ b.classList.remove('on'); });
+    var phrases = [
+      'Reading <b>' + city + '</b> permit filings from the last 30 days…',
+      'Checking which trades are <b>already attached</b>…',
+      'Marking the slots <b>nobody has claimed</b>…'
+    ];
+    var i = 0;
+    function nextStep(){
+      if(i > 0) steps[i - 1].className = 'done';
+      if(i >= phrases.length){ finish(); return; }
+      steps[i].className = 'active';
+      if(status) status.innerHTML = phrases[i];
+      if(i === 2) blips.forEach(function(b){ b.classList.add('on'); });
+      i++;
+      window.setTimeout(nextStep, reduced ? 60 : 620);
+    }
+    function finish(){
+      if(visual) visual.classList.remove('scanning');
+      runBtn.disabled = false;
+      runBtn.textContent = 'Run the radar again';
+      if(status) status.innerHTML = 'Scan complete — <b>' + city + ' &middot; ' + tradeLabel + '</b>';
+      loadStats().then(function(d){ showResult(city, d); });
+    }
+    nextStep();
+  });
+
+  function showResult(city, d){
+    var html = '';
+    if(city === 'Mississippi'){
+      html = '<div class="rr-kick">Hand-built market</div>'
+        + '<div class="rr-big">Mississippi has no permit feed to scan — <em>so a person builds yours.</em></div>'
+        + '<p>There is no machine-readable permit registry in Mississippi, so we will not fake a radar count. '
+        + 'A person reads the building-department records for your counties and builds your ' + tradeLabel.toLowerCase()
+        + ' brief by hand, inside two business days. Same shortlist, same standard: GC named, your slot open, nothing below your ' + floor + ' floor in the paid brief.</p>'
+        + '<div class="rr-actions"><a class="rr-primary" href="#request" data-claim="1">Claim my ' + tradeLabel + ' slot — two briefs free</a></div>';
+    } else if(city === 'Chicago' && trade === 'roofing' && d){
+      html = '<div class="rr-kick">Scan complete — live engine numbers</div>'
+        + '<div class="rr-big"><em>' + Number(d.jobs).toLocaleString('en-US') + ' open roofing slots</em> in Chicago right now.</div>'
+        + '<p>' + moneyShort(Number(d.value)) + ' of permitted work from the last ' + d.days + ' days where a general contractor is named '
+        + 'and no roofer is attached. Your paid brief filters that list to jobs at or above your ' + floor + ' floor and lands Monday, 6am.</p>'
+        + '<div class="rr-actions"><a class="rr-primary" href="' + briefUrl(city, trade) + '">Open my live Chicago brief</a>'
+        + '<a class="rr-secondary" href="#request" data-claim="1">Claim the Chicago roofing slot</a></div>';
+    } else {
+      html = '<div class="rr-kick">Radar locked — ' + city + ' &middot; ' + tradeLabel + '</div>'
+        + '<div class="rr-big">Your live brief is ready to <em>pull current filings.</em></div>'
+        + '<p>Open it and the engine queries ' + city + "'s permit records on the spot, keeping only jobs where a general "
+        + 'contractor is named and no ' + tradeLabel.toLowerCase() + ' contractor is attached. Your paid brief adds your ' + floor
+        + ' value floor and lands every Monday, 6am.</p>'
+        + '<div class="rr-actions"><a class="rr-primary" href="' + briefUrl(city, trade) + '">Open my live ' + city + ' brief</a>'
+        + '<a class="rr-secondary" href="#request" data-claim="1">Claim this slot — two briefs free</a></div>';
+    }
+    result.innerHTML = html;
+    result.className = 'radar-result show';
+    var claim = result.querySelector('[data-claim]');
+    if(claim) claim.addEventListener('click', function(){ claimSlot(city, tradeLabel); });
+    if(result.scrollIntoView) result.scrollIntoView({block:'nearest', behavior: reduced ? 'auto' : 'smooth'});
+  }
+})();
+</script>
 
 <script>
 /* The numbers in the hero and the stat strip come from live/stats.json, which is

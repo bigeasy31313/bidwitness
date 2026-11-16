@@ -563,7 +563,7 @@
 </style>
 <link rel="canonical" href="https://bidwitness.com/">
 <meta property="og:title" content="BidWitness — Construction leads from public permit records">
-<meta property="og:description" content="Weekly brief of jobs that have a permit and a general contractor named, but no one in your trade yet. Seven metros live, any other built by hand. Two briefs free.">
+<meta property="og:description" content="Weekly brief of jobs that have a permit and a general contractor named, but no one in your trade yet. Seven metros live. Two briefs free.">
 <meta property="og:url" content="https://bidwitness.com/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://bidwitness.com/og-image.jpg">
@@ -571,7 +571,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="BidWitness — Construction leads from public permit records">
-<meta name="twitter:description" content="Jobs with a permit and a general contractor named, but nobody in your trade yet. Seven metros live, any other built by hand. Two briefs free.">
+<meta name="twitter:description" content="Jobs with a permit and a general contractor named, but nobody in your trade yet. Seven metros live. Two briefs free.">
 <meta name="twitter:image" content="https://bidwitness.com/og-image.jpg">
 <script type="application/ld+json">
 {
@@ -599,7 +599,7 @@
       "name": "BidWitness permit lead briefs",
       "serviceType": "Construction lead generation from public permit records",
       "provider": { "@id": "https://bidwitness.com/#org" },
-      "areaServed": ["Chicago", "New York", "Austin", "Seattle", "Washington DC", "New Orleans", "Cincinnati", "Mississippi"],
+      "areaServed": ["Chicago", "New York", "Austin", "Seattle", "Washington DC", "New Orleans", "Cincinnati"],
       "offers": [
         { "@type": "Offer", "name": "BidWitness", "price": "299", "priceCurrency": "USD",
           "description": "One metro, one trade. Weekly brief every Monday with the general contractor named and phoned on every row. Two briefs free, then $299 a month." }
@@ -711,7 +711,6 @@
         <option>Washington DC</option>
         <option>New Orleans</option>
         <option>Cincinnati</option>
-        <option>Mississippi</option>
       </select>
       <label>Your trade</label>
       <div class="chips" id="radar-trades" role="group" aria-label="Choose your trade">
@@ -922,9 +921,6 @@
         <option>New Orleans</option>
         <option>Cincinnati</option>
       </optgroup>
-      <optgroup label="Built by hand — two business days">
-        <option>Mississippi</option>
-      </optgroup>
       <option>Other — tell us below</option>
     </select>
     <label for="bf-metro" id="bf-metro-label" style="display:none">Which metro?</label>
@@ -933,7 +929,7 @@
     <input id="bf-trade" name="trade" required placeholder="Roofing, electrical, HVAC…" style="margin-bottom:18px;">
     <button type="submit" class="cta">Get two free briefs</button>
     <div class="coverage">
-      <p class="metro-note" id="metro-note">Coverage includes <b>Chicago · New York · Austin · Seattle · Washington DC · New Orleans · Cincinnati</b> and <b>Mississippi</b>.<span class="sub">Briefs are hand-built and delivered within two business days.</span></p>
+      <p class="metro-note" id="metro-note">Coverage includes <b>Chicago · New York · Austin · Seattle · Washington DC · New Orleans · Cincinnati</b>.</p>
     </div>
   </form>
   <script>
@@ -1205,14 +1201,7 @@
 
   function showResult(city, d){
     var html = '';
-    if(city === 'Mississippi'){
-      html = '<div class="rr-kick">Hand-built market</div>'
-        + '<div class="rr-big">Mississippi has no permit feed to scan — <em>so a person builds yours.</em></div>'
-        + '<p>There is no machine-readable permit registry in Mississippi, so we will not fake a radar count. '
-        + 'A person reads the building-department records for your counties and builds your ' + tradeLabel.toLowerCase()
-        + ' brief by hand, inside two business days. Same shortlist, same standard: GC named, your slot open, nothing below your ' + floor + ' floor in the paid brief.</p>'
-        + '<div class="rr-actions"><a class="rr-primary" href="#request" data-claim="1">Claim my ' + tradeLabel + ' slot — two briefs free</a></div>';
-    } else if(city === 'Chicago' && trade === 'roofing' && d){
+    if(city === 'Chicago' && trade === 'roofing' && d){
       html = '<div class="rr-kick">Scan complete — live engine numbers</div>'
         + '<div class="rr-big"><em>' + Number(d.jobs).toLocaleString('en-US') + ' open roofing slots</em> in Chicago right now.</div>'
         + '<p>' + moneyShort(Number(d.value)) + ' of permitted work from the last ' + d.days + ' days where a general contractor is named '

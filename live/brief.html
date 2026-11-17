@@ -290,6 +290,31 @@
     return String(n||'').replace(/\*\*[A-Z]*\*\*/g,'').replace(/\s{2,}/g,' ').trim();
   }
   function titleCase(s){return String(s||'').replace(/\w\S*/g,function(w){return w.charAt(0).toUpperCase()+w.slice(1).toLowerCase();});}
+
+  /* Human job-type label for a row. City feeds often leave the type blank or
+     generic ("Permit", "Building Permit", "Other Work") — the raw label must
+     never reach the page, so derive the job type from the filing's own
+     description instead. Specific city types pass through untouched. */
+  function displayWork(rawType, desc){
+    var t=String(rawType||'').trim();
+    if(t && !/^(permit|building permit|other work)$/i.test(t)){
+      if(t===t.toUpperCase() && /[A-Z]/.test(t)) t=titleCase(t);
+      return t;
+    }
+    var d=String(desc||'');
+    if(/demolition|demolish|wreck/i.test(d)) return 'Demolition';
+    if(/re-?roof/i.test(d)) return 'Reroofing';
+    if(/addition/i.test(d)) return 'Addition';
+    if(/erect|new building|new construction|ground.?up/i.test(d)) return 'New construction';
+    if(/build-?out|buildout|tenant/i.test(d)) return 'Tenant build-out';
+    if(/rehabilit|rehab/i.test(d)) return 'Rehabilitation';
+    if(/remodel/i.test(d)) return 'Remodel';
+    if(/renovat/i.test(d)) return 'Renovation';
+    if(/alteration|\balter/i.test(d)) return 'Alteration';
+    if(/interior/i.test(d)) return 'Interior work';
+    if(/repair|restore|restoration/i.test(d)) return 'Repair work';
+    return 'Building permit — multi-trade';
+  }
   function api(url){return fetch(url).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); });}
   function qs_(o){return new URLSearchParams(o).toString();}
   function dedupe(rows){
@@ -539,7 +564,7 @@
         var rel=relevance(trade,r.work_type,r.work_description);
         if(rel.score<1) return;
         rows.push({addr:[r.street_number,r.street_direction,titleCase(r.street_name)].filter(Boolean).join(' '),
-          work:r.work_type||'Permit', gc:gcName||owner||'—', phone:'',
+          work:displayWork(r.work_type, r.work_description), gc:gcName||owner||'—', phone:'',
           val:parseFloat(r.reported_cost||0)||0, date:r.issue_date, score:rel.score, why:rel.why});
       });
       return {rows:rows,source:c.src,days:c.days,phone:false};
@@ -598,7 +623,7 @@
         var rel=relevance(trade,r[c.typeCol]||'',r[c.descCol]||'');
         if(rel.score<1) return;
         var phone = c.phoneCol ? String(r[c.phoneCol]||'') : '';
-        rows.push({addr:titleCase(r[c.addrCol]), work:r[c.typeCol]||'Building permit',
+        rows.push({addr:titleCase(r[c.addrCol]), work:displayWork(r[c.typeCol], r[c.descCol]),
           gc:(c.gcCol&&r[c.gcCol])?cleanName(r[c.gcCol]):(c.gcName?'—':'Not published'),
           phone:phone,
           val:parseFloat(r[c.valCol]||0)||0, date:r[c.dateCol], score:rel.score,
@@ -638,7 +663,7 @@
         var rel=relevance(trade, r[c.typeCol]||'', r[c.descCol]||'');
         if(rel.score<1) return;
         var dnum=parseFloat(r[c.dateCol]);
-        rows.push({addr:r[c.addrCol], work:r[c.typeCol]||'Building permit',
+        rows.push({addr:r[c.addrCol], work:displayWork(r[c.typeCol], r[c.descCol]),
           gc:(c.gcCol&&r[c.gcCol])?cleanName(r[c.gcCol]):(c.gcName?'—':'Not published'), phone:'',
           val:parseFloat(r[c.valCol]||0)||0,
           date:(isFinite(dnum)&&dnum>1e11)?new Date(dnum).toISOString():r[c.dateCol],

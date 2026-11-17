@@ -314,6 +314,7 @@
     if(/alteration|\balter/i.test(d)) return 'Alteration';
     if(/interior/i.test(d)) return 'Interior work';
     if(/repair|restore|restoration/i.test(d)) return 'Repair work';
+    if(/relocat|stair|egress/i.test(d)) return 'Alteration';
     return 'Building permit — multi-trade';
   }
   function api(url){return fetch(url).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); });}

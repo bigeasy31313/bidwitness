@@ -305,7 +305,8 @@
     if(/demolition|demolish|wreck/i.test(d)) return 'Demolition';
     if(/re-?roof/i.test(d)) return 'Reroofing';
     if(/addition/i.test(d)) return 'Addition';
-    if(/erect|new building|new construction|ground.?up/i.test(d)) return 'New construction';
+    if(/solar|photovolt/i.test(d)) return 'Solar PV installation';
+    if(/erect|new building|new construction|ground.?up|full building permit|proposed\b[^.]{0,80}(residence|building|dwelling|apartment|structure)/i.test(d)) return 'New construction';
     if(/build-?out|buildout|tenant/i.test(d)) return 'Tenant build-out';
     if(/rehabilit|rehab/i.test(d)) return 'Rehabilitation';
     if(/remodel/i.test(d)) return 'Remodel';

@@ -61,11 +61,19 @@
   table{width:100%;border-collapse:collapse;margin:6px 0 18px;font-size:14px;}
   th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:#2b3440;}
   th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--mid);font-weight:700;}
-  footer{border-top:1px solid #1d242c;background:var(--ink);padding:28px 0;font-size:12px;color:#68737f;}
-  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:flex-start;}
-  footer a{color:#8b96a4;text-decoration:none;}
-  footer a:hover{color:#fff;}
-  .fl{display:flex;gap:16px;flex-wrap:wrap;}
+  footer{border-top:1px solid #1d242c;padding:44px 0 0;font-size:12.5px;color:#68737f;background:var(--ink);}
+  footer .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1.25fr 1fr 1fr;gap:28px;padding-bottom:34px;}
+  footer .fbrand{font-size:13px;line-height:1.65;color:#8b96a4;}
+  footer .fbrand b{color:#e8edf3;font-size:14.5px;}
+  footer .fcol h4{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c3ccd8;margin:0 0 12px;font-weight:700;}
+  footer .fcol a{display:block;color:#8b96a4;text-decoration:none;padding:4px 0;}
+  footer .fcol a:hover{color:#fff;}
+  footer .disc{margin-top:10px;max-width:300px;line-height:1.6;}
+  footer .wl-badge{display:block;margin-top:16px;line-height:0;opacity:.85;width:200px;}
+  footer .wl-badge:hover{opacity:1;}
+  footer .wl-badge img{width:200px;height:43px;display:block;}
+  footer .fbar{border-top:1px solid #1d242c;padding:16px 0 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 18px;}
+  @media(max-width:940px){footer .fgrid{grid-template-columns:1fr 1fr;}}
   @media(max-width:640px){h1{font-size:40px;}main{padding:38px 0 56px;}}
 </style>
 </head>
@@ -141,13 +149,55 @@
 
 </div></div></main>
 <footer><div class="wrap">
-  <div>BidWitness — permit intelligence for specialty contractors.<br>Operated by Theta Work Labs LLC.</div>
-  <div class="fl">
-    <a href="/privacy">Privacy</a>
-    <a href="/terms">Terms</a>
-    <a href="/refunds">Refunds</a>
-    <a href="/cookies">Cookies</a>
-    <a href="mailto:hello@bidwitness.com">Contact</a>
+  <div class="fgrid">
+    <div class="fbrand">
+      <b>BidWitness</b><br>
+      Permit intelligence for specialty contractors.<br>
+      Operated by Theta Work Labs LLC, Jackson, Mississippi.
+      <div class="disc">Built on public building records. Not affiliated with, endorsed by, or acting for any municipality.</div>
+      <a class="wl-badge" href="https://websitelaunches.com/site/bidwitness.com" target="_blank" rel="noopener">
+        <img src="https://websitelaunches.com/badge/bidwitness.com.svg?theme=light"
+          alt="Established online &mdash; public launch record" width="200" height="43" loading="lazy">
+      </a>
+    </div>
+    <div class="fcol">
+      <h4>Product</h4>
+      <a href="/live/brief.html?city=Chicago&amp;trade=roofing">Live brief</a>
+      <a href="/#radar">Open-Slot Radar</a>
+      <a href="/#how">How it works</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#faq">Straight answers</a>
+      <a href="/#request">Get two free briefs</a>
+    </div>
+    <div class="fcol">
+      <h4>Coverage — live briefs</h4>
+      <a href="/live/brief.html?city=Chicago">Chicago</a>
+      <a href="/live/brief.html?city=New+York">New York</a>
+      <a href="/live/brief.html?city=Austin">Austin</a>
+      <a href="/live/brief.html?city=Seattle">Seattle</a>
+      <a href="/live/brief.html?city=Washington+DC">Washington DC</a>
+      <a href="/live/brief.html?city=New+Orleans">New Orleans</a>
+      <a href="/live/brief.html?city=Cincinnati">Cincinnati</a>
+    </div>
+    <div class="fcol">
+      <h4>Company</h4>
+      <a href="/#founder">Who&rsquo;s behind BidWitness</a>
+      <a href="/sample-brief.html">Sample brief</a>
+      <a href="mailto:hello@bidwitness.com">Contact</a>
+      <a href="https://websitelaunches.com/site/bidwitness.com" target="_blank" rel="noopener">Launch record</a>
+    </div>
+    <div class="fcol">
+      <h4>Legal</h4>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/refunds">Refunds</a>
+      <a href="/cookies">Cookies</a>
+      <a href="/unsubscribe">Unsubscribe</a>
+    </div>
+  </div>
+  <div class="fbar">
+    <span>&copy; 2026 Theta Work Labs LLC. All rights reserved.</span>
+    <span>One metro &middot; one trade &middot; one subscriber.</span>
   </div>
 </div></footer>
 </body></html>

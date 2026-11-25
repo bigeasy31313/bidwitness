@@ -3,10 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Unsubscribe &ndash; BidWitness</title>
-<meta name="description" content="Stop BidWitness briefs from being sent to your address.">
+<title>Unsubscribe from BidWitness Briefs — BidWitness</title>
+<meta name="description" content="Stop BidWitness weekly construction briefs from being sent to your email address. One click, no retention loop, no further emails.">
 <meta name="robots" content="noindex,nofollow">
-<link rel="canonical" href="https://bidwitness.com/unsubscribe.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
@@ -29,7 +28,7 @@
   .logo .mark{width:21px;height:21px;border-radius:5px;background:var(--accent);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;}
   .logo span{color:var(--accent);}
   main{padding:64px 0 76px;}
-  h1{font-family:var(--display);font-size:clamp(38px,5vw,56px);font-weight:700;line-height:1;letter-spacing:-.005em;margin-bottom:16px;}
+  h1,#doneh1{font-family:var(--display);font-size:clamp(38px,5vw,56px);font-weight:700;line-height:1;letter-spacing:-.005em;margin-bottom:16px;}
   .dek{font-size:17px;color:var(--mid);max-width:520px;margin-bottom:28px;line-height:1.6;}
   .addr{
     display:inline-block;font-family:var(--body);font-size:15px;font-weight:600;color:var(--ink);
@@ -55,7 +54,7 @@
   footer a{color:#8b96a4;text-decoration:none;}
   footer a:hover{color:#fff;}
   .fl{display:flex;gap:16px;flex-wrap:wrap;}
-  @media(max-width:600px){main{padding:44px 0 56px;}h1{font-size:38px;}}
+  @media(max-width:600px){main{padding:44px 0 56px;}h1,#doneh1{font-size:38px;}}
 </style>
 </head>
 <body>
@@ -81,7 +80,7 @@
     <div class="tick" id="tick" aria-hidden="true">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
     </div>
-    <h1 id="doneh1">You are off the list.</h1>
+    <h2 id="doneh1">You are off the list.</h2>
     <p class="dek" id="donedek">No further briefs will be sent to this address. Anything already in your inbox is the last of it.</p>
   </div>
 

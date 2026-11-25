@@ -3,9 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Your live brief — BidWitness</title>
+<title>Your Live Construction Brief — BidWitness</title>
 <meta name="description" content="A live BidWitness brief built from current city permit records: jobs with a general contractor named and your trade slot still open.">
 <meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://bidwitness.com/live/brief.html">
+<meta property="og:title" content="Your Live Construction Brief — BidWitness">
+<meta property="og:description" content="A live BidWitness brief built from current city permit records: jobs with a general contractor named and your trade slot still open.">
+<meta property="og:url" content="https://bidwitness.com/live/brief.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BidWitness">
+<meta property="og:image" content="https://bidwitness.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your Live Construction Brief — BidWitness">
+<meta name="twitter:description" content="A live BidWitness brief built from current city permit records: jobs with a general contractor named and your trade slot still open.">
+<meta name="twitter:image" content="https://bidwitness.com/og-image.jpg">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
@@ -98,7 +109,8 @@
   footer .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1.25fr 1fr 1fr;gap:28px;padding-bottom:34px;}
   footer .fbrand{font-size:13px;line-height:1.65;color:#8b96a4;}
   footer .fbrand b{color:#e8edf3;font-size:14.5px;}
-  footer .fcol h4{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c3ccd8;margin:0 0 12px;font-weight:700;}
+   .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  footer .fcol h3{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c3ccd8;margin:0 0 12px;font-weight:700;}
   footer .fcol a{display:block;color:#8b96a4;text-decoration:none;padding:4px 0;}
   footer .fcol a:hover{color:#fff;}
   footer .disc{margin-top:10px;max-width:300px;line-height:1.6;}
@@ -200,7 +212,7 @@
       </a>
     </div>
     <div class="fcol">
-      <h4>Product</h4>
+      <h3>Product</h3>
       <a href="/live/brief.html?city=Chicago&amp;trade=roofing">Live brief</a>
       <a href="/#radar">Open-Slot Radar</a>
       <a href="/#how">How it works</a>
@@ -209,7 +221,7 @@
       <a href="/#request">Get two free briefs</a>
     </div>
     <div class="fcol">
-      <h4>Coverage — live briefs</h4>
+      <h3>Coverage — live briefs</h3>
       <a href="/live/brief.html?city=Chicago">Chicago</a>
       <a href="/live/brief.html?city=New+York">New York</a>
       <a href="/live/brief.html?city=Austin">Austin</a>
@@ -219,14 +231,14 @@
       <a href="/live/brief.html?city=Cincinnati">Cincinnati</a>
     </div>
     <div class="fcol">
-      <h4>Company</h4>
+      <h3>Company</h3>
       <a href="/#founder">Who&rsquo;s behind BidWitness</a>
-      <a href="/sample-brief.html">Sample brief</a>
+      <a href="/live/brief.html?city=Chicago&amp;trade=roofing">Sample brief</a>
       <a href="mailto:hello@bidwitness.com">Contact</a>
       <a href="https://websitelaunches.com/site/bidwitness.com" target="_blank" rel="noopener">Launch record</a>
     </div>
     <div class="fcol">
-      <h4>Legal</h4>
+      <h3>Legal</h3>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
       <a href="/refunds">Refunds</a>
@@ -551,8 +563,8 @@
 
     var withPhone = rows.some(function(r){return r.phone;});
     var head = withPhone
-      ? '<table><thead><tr><th style="width:25%">Job</th><th style="width:20%">General contractor</th><th style="width:14%">Direct line</th><th style="width:10%">Value</th><th style="width:9%">Issued</th><th style="width:22%">Why you fit</th></tr></thead><tbody>'
-      : '<table><thead><tr><th style="width:29%">Job</th><th style="width:23%">General contractor</th><th style="width:12%">Value</th><th style="width:11%">Issued</th><th style="width:25%">Why you fit</th></tr></thead><tbody>';
+      ? '<table><caption class="sr-only">Construction jobs with a permit and a general contractor named, and no contractor in your trade attached yet</caption><thead><tr><th style="width:25%">Job</th><th style="width:20%">General contractor</th><th style="width:14%">Direct line</th><th style="width:10%">Value</th><th style="width:9%">Issued</th><th style="width:22%">Why you fit</th></tr></thead><tbody>'
+      : '<table><caption class="sr-only">Construction jobs with a permit and a general contractor named, and no contractor in your trade attached yet</caption><thead><tr><th style="width:29%">Job</th><th style="width:23%">General contractor</th><th style="width:12%">Value</th><th style="width:11%">Issued</th><th style="width:25%">Why you fit</th></tr></thead><tbody>';
     var body = shown.map(function(r){
       return '<tr>'
         + '<td><span class="addr">'+esc(r.addr)+'</span><span class="wk">'+esc(r.work)+'</span></td>'
